@@ -1,9 +1,12 @@
-import Admin from "./Pages/Admin";
+// import Admin from "./Pages/Admin";
+import ProductPage from "./Pages/ProductPage";
 
 function App() {
   return (
     <div>
-      <Admin />
+      {/* <Admin /> */}
+      {/* Sourav Work */}
+      <ProductPage />
     </div>
   );
 }
