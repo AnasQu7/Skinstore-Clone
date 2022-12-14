@@ -1,9 +1,9 @@
-import logo from './logo.svg';
+import Admin from "./Pages/Admin";
 
 function App() {
   return (
     <div>
-      
+      <Admin />
     </div>
   );
 }
