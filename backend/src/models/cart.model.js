@@ -1,18 +1,21 @@
 const { Schema, model } = require("mongoose");
 
-const CartSchema = new Schema({
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
+const CartSchema = new Schema(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+    productId: {
+      type: Schema.Types.ObjectId,
+      ref: "product",
+      required: true,
+    },
+    indiVidualQunatity: { type: Number, default: 1 },
   },
-  productId: {
-    type: Schema.Types.ObjectId,
-    ref: "product",
-    required: true,
-  },
-  indiVidualQunatity: { type: Number, default: 1 },
-});
+  { versionKey: false, timestamps: true }
+);
 
 const CartModel = model("cart", CartSchema);
 
