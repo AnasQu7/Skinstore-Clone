@@ -2,7 +2,7 @@ const http = require("http");
 const express = require("express");
 const {Server} = require("socket.io");
 require("dotenv").config();
-
+const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const app = express();
 const SignupRotue = require("./src/routes/signup.route");
@@ -11,7 +11,7 @@ const  LoginRoute = require("./src/routes/login.route")
 // const io = new Server(httpServer);
 
 app.use(express.json());
-
+app.use(cors())
 const connect = require("./src/config/db")
 app.get("/", async(req,res)=>{
     res.send("yahoo!!!")

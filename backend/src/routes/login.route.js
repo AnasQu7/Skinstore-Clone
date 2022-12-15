@@ -9,12 +9,12 @@ LoginRoute.use(express.json());
 LoginRoute.post("/",async (req,res) =>{
     const {email,password} = req.body;
     try{
-        const  user = await Auth.find({email});
+        const  user = await Auth.findOne({email});
         if(!user){
-            return res.status(401).send("Unauthorized")
+            return res.status(401).send({message :"user not found", status : "NO"})
              } else{
-                 if(passowrd !== user.passowrd){
-                   return res.status(401).send("Unauthorized")
+                 if(password !== user.password){
+                    return res.status(401).send({message:"Unauthorized", status : "NO"})
                  } else {
                     
                         
@@ -28,7 +28,7 @@ LoginRoute.post("/",async (req,res) =>{
                             }, 
                             process.env.refresh_password,
                             {expiresIn : "7days"})
-                         res.status(201).send({token , refreshToken, message : "Login Successful"})
+                            res.status(201).json({token , refreshToken, message : "Login Successful",status : "OK"})
                      
                  }
              }
