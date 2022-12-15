@@ -4,16 +4,23 @@ const jwt = require("jsonwebtoken");
 
 let ProductModel = "product";
 let CartModel = require("../models/cart.model");
+const UserModel = require("../models/user.model");
 
-app.get("/", async (req, res) => {
-  const { token } = req.header.authentications;
-  token = jwt.verify(token);
-  let userId = token.id;
+// fetching cart items*********************
 
-  const cartItem = await CartModel.find({ userId });
+app.get("/fetchcartItem", async (req, res) => {
+  let { token } = req.headers;
+  token = jwt.verify(token, "serretKey");
+
+  const user = await UserModel.findOne({ email: token.email });
+
+  let userId = user._id;
+
+  const cartItem = await CartModel.find({ userId }).populate("productId");
   try {
     if (cartItem.length > 0) {
-      cartItem = cartItem.populate("product");
+      // cartItem = cartItem.populate("product");
+      console.log(cartItem);
       return res.send(cartItem);
     } else {
       return res.send("there is no item inside the cart");
@@ -25,37 +32,32 @@ app.get("/", async (req, res) => {
 
 // **************add to cart*********************
 app.post("/", async (req, res) => {
-  const { token } = req.header.authentications;
+  let { token } = req.headers;
   let { productId, qty } = req.body;
-  token = jwt.verify(token);
-  let userId = token.id;
-  let totalCartIem = await CartModel.find({ userId });
+  token = jwt.decode(token, "serretKey");
+  const user = await UserModel.findOne({ email: token.email });
+
+  let userId = user._id;
+
+  let product = await CartModel.findOne({ userId, productId });
+  // console.log(product);
   try {
-    let product = totalCartIem.findOne({ productId });
     if (!product) {
       let newCartItem = new CartModel({ userId, productId });
       await newCartItem.save();
 
-      return res.redirect("/");
+      return res.redirect("/fetchcartItem");
     }
 
-    totalQunatity = product.quantity + qty;
+    totalQunatity = product.indiVidualQunatity + qty;
+    console.log(totalQunatity);
 
-    await CartModel.find(
+    let x = await CartModel.updateOne(
       { userId, productId },
-      { $set: { quantity: totalQunatity } }
+      { $set: { indiVidualQunatity: totalQunatity } }
     );
-    return res.redirect("/");
-  } catch (e) {
-    return res.send(e.message);
-  }
-});
-
-app.get("/quantity", async (req, res) => {
-  let limitedProduct = await ProductModel.find({ quantity: { $lt: 5 } });
-
-  try {
-    return res.status(200).send(limitedProduct);
+    console.log(x);
+    return res.redirect("/fetchcartItem");
   } catch (e) {
     return res.send(e.message);
   }
