@@ -3,13 +3,17 @@ import React from 'react'
 import Account from './Account'
 import Brands from './Brands'
 import Cart from './Cart'
+import Hair from './Hair'
+import Holiday from './Holiday'
 import Navmenu from './Navmenu'
 import Popsearch from './Popsearch'
+import Sale from './Sale'
 import Search from './Search'
+import Skin from './Skin'
 
 function Navbar() {
   return (
-    <Box position="fixed" top="0px" right="0px" left="0px">
+    <Box zIndex={2000} position="fixed" top="0px" right="0px" left="0px">
     <Box display='flex' justifyContent="space-between" alignItems='center' px="20px" h={{lg:"110px",md:"50px",sm:"50px",base:"50px"}} borderBottom="2px solid black" bg="white">
           <Flex display={{lg:"none",md:"flex",sm:"flex",base:"flex"}} gap="15px">
             <Navmenu/>
@@ -28,11 +32,19 @@ function Navbar() {
           <Cart/>
           </Flex>
     </Box>
-    <Flex display={{lg:"flex",md:"none",sm:"none",base:'none'}} bg="white" boxShadow= {` rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;`} px="100px" py="5px">
+    <Flex display={{lg:"flex",md:"none",sm:"none",base:'none'}} bg="white" gap="20px" boxShadow= {` rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;`} px="100px" >
       <Brands/>
+      <Holiday/>
+      <Sale/>
+      <Skin/>
+      <Hair/>
     </Flex>
     </Box>
   )
 }
 
 export default Navbar
+
+
+
+

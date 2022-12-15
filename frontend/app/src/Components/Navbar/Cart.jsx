@@ -13,6 +13,7 @@ import {
     Text,
     Image,
   } from '@chakra-ui/react'
+import { useEffect } from 'react';
 import { useState } from 'react';
   import { BsMinecartLoaded } from 'react-icons/bs';
   
@@ -989,6 +990,18 @@ function Cart() {
         }
         ]
         },])
+        const [cartTotal, setCartTotal] = useState(0)
+        function toggleTotal(){
+          let sum = 0
+          cartData.forEach((e)=>{
+               sum += (+e.price)
+          })
+          console.log(sum)
+          setCartTotal(sum)
+        }
+        useEffect(()=>{
+            toggleTotal()
+        },[])
   return (
     <Popover trigger='hover'>
   <PopoverTrigger>
@@ -1008,13 +1021,18 @@ function Cart() {
     <PopoverArrow />
     <PopoverCloseButton />
     <PopoverHeader >
+      {cartData.length!==0?<Flex my="17px" justifyContent='space-between'>
+        <Text>{`${cartData.length} ${(cartData.length>1)?"items":"item"} in cart`}</Text>
+        <Text fontWeight='bold'>${cartTotal}</Text>
+      </Flex>:""}
     <Button colorScheme='teal' variant='outline'>View Cart</Button>
     </PopoverHeader>
     <PopoverBody>
       <Box maxH='75vh' overflowX='hidden' overflowY='scroll'>
 
      {cartData.length===0? "there is no items in cart":
-     cartData.map((e)=><Box gap="10px" display='flex' p={6}>
+     cartData.map((e)=>{
+      return(<Box gap="10px" display='flex' p={6}>
       <Flex justifyContent='center' h="80px" w="80px" alignItems='center'>
       <Image h="100%" alt={e.image_link} src={e.api_featured_image}/>
       </Flex>
@@ -1022,9 +1040,8 @@ function Cart() {
         <Text>{e["name"]}</Text>
         <Text fontWeight="bold">{`${e["price_sign"]}${e["price"]}`}</Text>
         <Text>Quantity: {e["quantity"]?e["quantity"]:1}</Text>
-        
       </Box>
-     </Box>)
+     </Box>)})
      }
      </Box>
     </PopoverBody>

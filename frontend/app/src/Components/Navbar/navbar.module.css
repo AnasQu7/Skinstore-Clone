@@ -2,3 +2,8 @@
      background-color: #f9f9f9;
      cursor: pointer;
 }
+.blackHover:hover{
+     background-color: #313030;
+     cursor: pointer;
+     color: white;
+}
