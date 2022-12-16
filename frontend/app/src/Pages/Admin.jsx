@@ -1,10 +1,9 @@
 import React from "react";
-import Sidebar from "./AbhishekDashboard/Sidebar";
-import ManageQuantity from "../AbhishekDashboard/ManageQunatity";
-import OrderManagement from "../AbhishekDashboard/OrderManagement";
-import ProductDetails from "../AbhishekDashboard/ProductDetails";
-// import ProductDetails from "../AbhishekDashboard/ProductDetails";
-import Sidebar from "../AbhishekDashboard/Sidebar";
+import Sidebar from "../Components/AbhishekDashboard/Sidebar";
+import ManageQuantity from "../Components/AbhishekDashboard/ManageQunatity";
+import OrderManagement from "../Components/AbhishekDashboard/OrderManagement";
+import ProductDetails from "../Components/AbhishekDashboard/ProductDetails";
+
 
 const Admin = () => {
   return (

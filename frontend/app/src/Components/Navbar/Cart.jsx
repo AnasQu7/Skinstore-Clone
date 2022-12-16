@@ -9,7 +9,6 @@ import {
     Flex,
     Button,
     Box,
-    Spacer,
     Text,
     Image,
   } from '@chakra-ui/react'
@@ -17,7 +16,7 @@ import { useState } from 'react';
   import { BsMinecartLoaded } from 'react-icons/bs';
   
 function Cart() {
-  const [cartData , setCartData] = useState([{
+  const [cartData] = useState([{
     "id": 1048,
     "brand": "colourpop",
     "name": "Lippie Pencil",
