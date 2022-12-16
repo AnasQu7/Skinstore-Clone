@@ -9,7 +9,7 @@ const UserSchema = new Schema(
     phone: Number,
     role: {
       type: String,
-      enum: ["User", "Empoloye", "Admin"],
+      enum: ["User", "Employee", "Admin"],
       default: "User",
     },
     age: String,

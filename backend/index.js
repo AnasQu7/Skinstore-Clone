@@ -7,7 +7,8 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const SignupRotue = require("./src/routes/signup.route");
 const httpServer = http.createServer(app);
-const  LoginRoute = require("./src/routes/login.route")
+const  LoginRoute = require("./src/routes/login.route");
+const ProductRoute = require("./src/routes/products.route")
 // const io = new Server(httpServer);
 
 app.use(express.json());
@@ -18,6 +19,7 @@ app.get("/", async(req,res)=>{
 });
 app.use("/signup", SignupRotue)
 app.use("/login", LoginRoute)
+app.use("/product", ProductRoute)
 
 httpServer.listen(PORT, async () =>{
     try{
