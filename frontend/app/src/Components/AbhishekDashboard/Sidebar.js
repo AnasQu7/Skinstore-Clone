@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
-const Sidebar = () => {
+const Sidebar = ({ displayFunction }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -66,6 +66,10 @@ const Sidebar = () => {
                 mt="25px"
                 color="Brown"
                 fontSize="25px"
+                onClick={() => {
+                  onClose();
+                  displayFunction("ProductList");
+                }}
               >
                 Product List
               </MenuItem>
@@ -76,6 +80,10 @@ const Sidebar = () => {
                 mt="25px"
                 color="Brown"
                 fontSize="25px"
+                onClick={() => {
+                  onClose();
+                  displayFunction("AddNewProduct");
+                }}
               >
                 Add New Product
               </MenuItem>
@@ -87,6 +95,10 @@ const Sidebar = () => {
                 mt="25px"
                 color="Brown"
                 fontSize="25px"
+                onClick={() => {
+                  onClose();
+                  displayFunction("ManageQuantity");
+                }}
               >
                 Manage Quantity
               </MenuItem>
@@ -98,6 +110,10 @@ const Sidebar = () => {
                 mt="25px"
                 color="Brown"
                 fontSize="25px"
+                onClick={() => {
+                  onClose();
+                  displayFunction("SeeOrderDetails");
+                }}
               >
                 See Order Details
               </MenuItem>
@@ -109,6 +125,10 @@ const Sidebar = () => {
                 mt="25px"
                 color="Brown"
                 fontSize="25px"
+                onClick={() => {
+                  onClose();
+                  displayFunction("UserDetails");
+                }}
               >
                 User Details
               </MenuItem>
@@ -120,6 +140,10 @@ const Sidebar = () => {
                 mt="25px"
                 color="Brown"
                 fontSize="25px"
+                onClick={() => {
+                  onClose();
+                  displayFunction("OrderManagement");
+                }}
               >
                 Order Management
               </MenuItem>

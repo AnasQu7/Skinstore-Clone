@@ -10,16 +10,18 @@ import {
   Td,
   Button,
   TableContainer,
+  Input,
 } from "@chakra-ui/react";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, CheckIcon } from "@chakra-ui/icons";
 
 const ManageQuantity = () => {
   const [productData, setProductData] = useState([]);
+  const [qty, setQty] = useState();
   const getProductData = async () => {
     let { data } = await axios.get("http://localhost:8080/admin/quantity");
     try {
       setProductData(data.limitedProduct);
-      console.log(data);
+      // console.log(data);
       return;
     } catch (e) {
       return console.log(e.message);
@@ -34,9 +36,31 @@ const ManageQuantity = () => {
       getProductData();
       return;
     } catch (e) {
-      console.log(e);
+      return console.log(e);
     }
-    console.log(id);
+    // console.log(id);
+  };
+
+  // managing quantity
+
+  const handleClickForManageQty = async (id) => {
+    if (qty === 0 || qty === "") {
+      return alert("Please provide QTY");
+    }
+
+    await axios.post("http://localhost:8080/admin/increasequantity", {
+      id,
+      qty,
+    });
+    try {
+      alert("ok");
+      // console.log(data);
+      getProductData();
+      setQty(0);
+      return;
+    } catch (e) {
+      return console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -44,7 +68,7 @@ const ManageQuantity = () => {
   }, []);
   return (
     <div>
-      <h1>ProductDetails</h1>
+      <h1>ManageQuantity</h1>
       <TableContainer>
         <Table variant="simple" maxWidth="100%">
           <Thead>
@@ -54,6 +78,7 @@ const ManageQuantity = () => {
               <Th>Category</Th>
               <Th>Quantity</Th>
               <Th>Price</Th>
+              <Th>Manage Quantity</Th>
               <Th>Remove</Th>
             </Tr>
           </Thead>
@@ -67,6 +92,17 @@ const ManageQuantity = () => {
                   <Td>{prod.category}</Td>
                   <Td>{prod.quantity}</Td>
                   <Td>{prod.price}</Td>
+                  <Th>
+                    <Input
+                      placeholder="QTY"
+                      w="25%"
+                      onChange={(e) => setQty(Number(e.target.value))}
+                    />
+                    <Button onClick={() => handleClickForManageQty(prod._id)}>
+                      <CheckIcon />
+                    </Button>
+                  </Th>
+
                   <Td>
                     <Button onClick={() => handleDataDelete(prod._id)}>
                       <DeleteIcon />
