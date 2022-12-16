@@ -1,4 +1,4 @@
-import { Box, Text, SimpleGrid, Image, Button } from "@chakra-ui/react";
+import { Box, SimpleGrid, Image } from "@chakra-ui/react";
 import React from "react";
 
 const Middle = () => {

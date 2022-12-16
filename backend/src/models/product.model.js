@@ -10,6 +10,7 @@ const ProductSchema = new Schema({
     image_link : {type : String, required: true},
     description : {type : String , required : true},
     rating : Number,
+    review : Number,
     category : String,
     product_type : String,
     quantity : Number

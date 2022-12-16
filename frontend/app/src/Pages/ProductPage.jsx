@@ -1,19 +1,13 @@
 import {
     Box,
-    InputGroup,
-    InputLeftElement,
-    Input,
-    Stack,
-    Show,
-    Spinner,
     Text,
     Heading,
     Button
   } from "@chakra-ui/react";
   import axios from "axios";
   import { useEffect, useState } from "react";
-  import ProductCard from "../Components/ProductCard";
-  import Pagination from "../Components/pagination";
+  import ProductCard from "../Components/Products/ProductCard";
+  import Pagination from "../Components/Products/pagination";
   
   const ProductPage = () => {
     const [posts, setPosts] = useState([]);

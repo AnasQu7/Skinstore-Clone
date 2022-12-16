@@ -1,10 +1,12 @@
-// import OrderManagement from "./AbhishekDashboard/OrderManagement";
-import Admin from "./Pages/Admin";
-
+import Navbar from "./Components/Navbar/Navbar";
+import Footer from "./Components/Footer";
+import AllRoutes from "./Pages/Allroutes";
 function App() {
   return (
     <div>
-      <Admin />
+      <Navbar />
+      <AllRoutes />
+      <Footer />
     </div>
   );
 }

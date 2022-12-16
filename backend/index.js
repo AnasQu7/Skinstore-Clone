@@ -15,7 +15,10 @@ app.use(urlencoded({ extended: true }));
 
 const SignupRotue = require("./src/routes/signup.route");
 const httpServer = http.createServer(app);
+
 const LoginRoute = require("./src/routes/login.route");
+const ProductRoute = require("./src/routes/products.route");
+
 // const io = new Server(httpServer);
 
 app.use(express.json());
@@ -24,8 +27,10 @@ const connect = require("./src/config/db");
 app.get("/", async (req, res) => {
   res.send("yahoo!!!");
 });
+
 app.use("/signup", SignupRotue);
 app.use("/login", LoginRoute);
+app.use("/product", ProductRoute);
 
 const CartRoutes = require("./src/routes/cart.route");
 const AdminRoutes = require("./src/routes/admin.route");
