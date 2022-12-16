@@ -2,7 +2,7 @@ const express = require("express");
 const app = express.Router();
 const jwt = require("jsonwebtoken");
 
-let ProductModel = "product";
+let ProductModel = require("../models/product.model");
 let CartModel = require("../models/cart.model");
 const UserModel = require("../models/user.model");
 
