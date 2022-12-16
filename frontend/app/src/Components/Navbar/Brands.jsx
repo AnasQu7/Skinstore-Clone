@@ -375,7 +375,7 @@ function Brands() {
   return (
     <Popover trigger="hover">
       <PopoverTrigger>
-        <Box>Brands</Box>
+        <Box className={NavStyle.blackHover} p="7px">Brands</Box>
       </PopoverTrigger>
       <PopoverContent w="100vw">
         <PopoverArrow />
