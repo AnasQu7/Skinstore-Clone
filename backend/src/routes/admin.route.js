@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express.Router();
 const { model, Schema } = require("mongoose");
-let ProductModel = model("product", new Schema({}));
+let ProductModel = require("../models/product.model");
+
+// Get all Product *******************
 
 app.get("/allproduct", async (req, res) => {
   try {
@@ -24,25 +26,68 @@ app.get("/quantity", async (req, res) => {
   }
 });
 
+//  Increase the quantity of the product**********************
+app.post("/increasequantity", async (req, res) => {
+  let { id, qty } = req.body;
+  let product = await ProductModel.findOne({ _id: id });
+  // console.log(product.quantity, "name");
+  // console.log(product);
+
+  try {
+    if (!product) {
+      return res.send({
+        message: "there is not any product with this product ID",
+      });
+    }
+
+    let totalQunatity = product.quantity + qty;
+    console.log(totalQunatity);
+    let x = await ProductModel.findByIdAndUpdate(
+      { _id: id },
+      { $set: { quantity: totalQunatity } }
+    );
+
+    return res.send({
+      message: `Product updated with ${totalQunatity} quantity`,
+    });
+  } catch (e) {
+    console.log(e.message);
+    return res.send(e.message);
+  }
+});
+
 // ***********************add new product to the product coolecion of the database*
-app.post("addnewproduct", async (req, res) => {
-  const { name, type, category, brand, currency, price, imageurl, quantity } =
+app.post("/addnewproduct", async (req, res) => {
+  // console.log("hellojnjjbhj");
+  const { name, category, brand, description, price, image_link, quantity } =
     req.body;
 
-  let newProduct = new ProductModel({
-    name,
-    type,
-    category,
-    brand,
-    currency,
-    price,
-    imagelink,
-    quantity,
-    description,
-  });
+  try {
+    // console.log(
+    //   name,
+    //   category,
+    //   description,
+    //   brand,
+    //   price,
+    //   image_link,
+    //   quantity
+    // );
 
-  await newProduct.save();
-  return res.send("product added");
+    let newProduct = new ProductModel({
+      name,
+      category,
+      brand,
+      price,
+      image_link,
+      quantity,
+      description,
+    });
+
+    await newProduct.save();
+    return res.status(200).send({ message: "OK", newProduct });
+  } catch (e) {
+    return res.send(e.message);
+  }
 });
 
 // Remove product from product list

@@ -7,8 +7,6 @@ import {
     DrawerContent,
     DrawerCloseButton,
     useDisclosure,
-    Input,
-    Button,
     Box,
     Flex,
     Image,

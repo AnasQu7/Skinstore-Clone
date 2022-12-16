@@ -9,7 +9,7 @@ import Search from './Search'
 
 function Navbar() {
   return (
-    <Box position="fixed" top="0px" right="0px" left="0px">
+    <Box zIndex={2000} position="fixed" top="0px" right="0px" left="0px">
     <Box display='flex' justifyContent="space-between" alignItems='center' px="20px" h={{lg:"110px",md:"50px",sm:"50px",base:"50px"}} borderBottom="2px solid black" bg="white">
           <Flex display={{lg:"none",md:"flex",sm:"flex",base:"flex"}} gap="15px">
             <Navmenu/>
