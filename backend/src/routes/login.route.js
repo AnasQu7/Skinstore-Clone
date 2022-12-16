@@ -2,7 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const LoginRoute = express.Router();
 const jwt = require("jsonwebtoken");
-const Auth = require("../models/signup.model");
+const Auth = require("../models/user.model");
 
 LoginRoute.use(express.json());
 
