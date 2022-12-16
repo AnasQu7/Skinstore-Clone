@@ -1,11 +1,23 @@
 import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import Account from './Account'
+import Bath from './Bath'
+import Blog from './Blog'
 import Brands from './Brands'
+import Build from './Build'
 import Cart from './Cart'
+import Fragrance from './Fragrance'
+import Hair from './Hair'
+import Holiday from './Holiday'
+import Makeup from './Makeup'
 import Navmenu from './Navmenu'
 import Popsearch from './Popsearch'
+import Sale from './Sale'
 import Search from './Search'
+import SelfCare from './SelfCare'
+import Skin from './Skin'
+import Tools from './Tools'
+import Trending from './Trending'
 
 function Navbar() {
   return (
@@ -28,11 +40,25 @@ function Navbar() {
           <Cart/>
           </Flex>
     </Box>
-    <Flex display={{lg:"flex",md:"none",sm:"none",base:'none'}} bg="white" boxShadow= {` rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;`} px="100px" py="5px">
+    <Flex display={{lg:"flex",md:"none",sm:"none",base:'none'}} gap="20px" bg="white" boxShadow= {` rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;`} px="100px">
       <Brands/>
+      <Holiday/>
+      <Sale/>
+      <Skin/>
+      <Hair/>
+      <Makeup/>
+      <Bath/>
+      <Fragrance/>
+      <SelfCare/>
+      <Tools/>
+      <Trending/>
+      <Build/>
+      <Blog/>
     </Flex>
     </Box>
   )
 }
 
 export default Navbar
+
+
