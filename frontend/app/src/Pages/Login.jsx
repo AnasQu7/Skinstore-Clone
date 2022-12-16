@@ -1,0 +1,112 @@
+import {
+    Flex,
+    Box,
+    FormControl,
+    FormLabel,
+    Input,
+    Checkbox,
+    Stack,
+    Button,
+    Heading,
+    Text,
+    useColorModeValue
+  } from "@chakra-ui/react";
+  import { useState } from "react";
+  import { Link, useLocation, useNavigate } from "react-router-dom";
+  import { useAuth } from "../Components/Utilis/Auth";
+  export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [user, setUser] = useState("");
+    const auth = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const redirectPath = location.state?.path || "/";
+    const handleLogin = (e) => {
+      e.preventDefault();
+      fetch("http://localhost:8080/login", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*"
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data, "UserRegister");
+          console.log(data);
+          if (data.status === "OK") {
+            alert("Login Successful");
+            setUser(data.data);
+            auth.login(data.data);
+            navigate(redirectPath, { replace: true });
+          }
+        })
+        .catch(() => alert("ERROR"));
+    };
+  
+    return (
+      <Flex
+        minH={"100vh"}
+        align={"center"}
+        justify={"center"}
+        bg={useColorModeValue("gray.50", "gray.800")}
+      >
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading fontSize={"3xl"}>Existing Customers</Heading>
+          </Stack>
+          <Box
+            rounded={"lg"}
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow={"lg"}
+            p={8}
+          >
+            <Stack spacing={4}>
+              <FormControl id="email">
+                <FormLabel>Email address</FormLabel>
+                <Input type="email" onChange={(e) => setEmail(e.target.value)} />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align={"start"}
+                  justify={"space-between"}
+                >
+                  <Link to="/register">
+                    <Text color={"blue.400"}> New Customer?</Text>
+                  </Link>
+                </Stack>
+                <Button
+                  onClick={handleLogin}
+                  fontWeight="600"
+                  bgColor="black"
+                  color="white"
+                  borderRadius="0"
+                  _hover={{
+                    bg: "cyan.500"
+                  }}
+                >
+                  LOGIN
+                </Button>
+              </Stack>
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
+    );
+  }
+  
