@@ -1,180 +1,163 @@
 import {
   Box,
+  Container,
+  SimpleGrid,
+  Stack,
   Text,
   Button,
-  SimpleGrid,
-  List,
+  HStack,
+  Icon,
+  VStack,
+  Divider,
   ListItem,
   ListIcon,
-  Heading,
+  List,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { PhoneIcon } from "@chakra-ui/icons";
 import { TbTruckDelivery, TbRefresh, TbHelp } from "react-icons/tb";
 import { MdGpsFixed } from "react-icons/md";
-import {
-  FaAlipay,
-  FaCcAmex,
-  FaCcMastercard,
-  FaCcStripe,
-  FaCcVisa,
-  FaCookie,
-  FaPaypal,
-  FaPinterest,
-  FaSnapchat,
-} from "react-icons/fa";
-import React from "react";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-
-const Footer = () => {
+import { FaCookie, FaPinterest, FaSnapchat } from "react-icons/fa";
+const ListHeader = ({ children }) => {
   return (
-    <Box mb="1rem">
-      <Box mt="4rem" h="1px" bgColor="black"></Box>
-      <SimpleGrid columns={2} w="90%" m="auto" pl="2.5%" pr="2.5%" mt="5rem">
-        <Box textAlign="left">
-          <Text pb=".5rem" fontWeight="600">
-            Sign up to our email list and receive 20% off your next order
-          </Text>
-          <Button
-            bgColor="black"
-            color="white"
-            fontWeight="200"
-            borderRadius="0px"
-          >
-            SIGN UP
-          </Button>
-        </Box>
-        <Box textAlign="left" color="black">
-          <Text pb=".5rem" fontWeight="600">
-            Connect with us
-          </Text>
-          <Box display="flex" gap="10">
-            <FaFacebook />
-            <FaTwitter />
-            <FaSnapchat />
-            <FaPinterest />
-            <FaInstagram />
-          </Box>
-        </Box>
-      </SimpleGrid>
-      <Box
-        display="flex"
-        gap="10"
-        w="90%"
-        m="auto"
-        pl="2.5%"
-        pr="2.5%"
-        mt="2rem"
-        fontWeight="200"
-      >
-        <Box textAlign="left" w="50vw">
-          <Box mb="2rem" h="1.5px" bgColor="grey"></Box>
-          <Text pb=".5rem" fontWeight="600">
-            Help & Information
-          </Text>
-          <List spacing={3}>
-            <ListItem>
-              <ListIcon as={PhoneIcon} fontSize="1.2rem" color="black.800" />
-              Customer Service
-            </ListItem>
-            <ListItem>
-              <ListIcon
-                as={TbTruckDelivery}
-                fontSize="1.2rem"
-                color="black.800"
-              />
-              Delivery Information
-            </ListItem>
-            <ListItem>
-              <ListIcon as={TbRefresh} fontSize="1.2rem" color="black.800" />
-              Return &nbsp; & &nbsp; Refund
-            </ListItem>
-            <ListItem>
-              <ListIcon as={TbHelp} fontSize="1.2rem" color="black.800" />
-              Help Center
-            </ListItem>
-            <ListItem>
-              <ListIcon as={MdGpsFixed} fontSize="1.2rem" color="black.800" />
-              Track my order
-            </ListItem>
-            <Text>Accessiblity</Text>
-            <ListItem>
-              <ListIcon as={FaCookie} fontSize="1.2rem" color="black.800" />
-              Cookie Setting
-            </ListItem>
-          </List>
-        </Box>
-        <Box w="20vw" textAlign="left">
-          <Box mb="2rem" h="1.5px" bgColor="grey"></Box>
-          <Text pb=".5rem" fontWeight="600">
-            About SkinStore
-          </Text>
-          <List spacing={3}>
-            <ListItem>Key Workers Discount</ListItem>
-            <ListItem>About Us</ListItem>
-            <ListItem>Affilate Program</ListItem>
-            <ListItem>Brand Directory</ListItem>
-            <ListItem>Coupon Codes</ListItem>
-            <ListItem>Refer A Friend</ListItem>
-            <ListItem>Student Discount</ListItem>
-            <ListItem>Join SkinStore Experts</ListItem>
-          </List>
-        </Box>
-        <Box w="20vw" textAlign="left">
-          <Box mb="2rem" h="1.5px" bgColor="grey"></Box>
-          <Text pb=".5rem" fontWeight="600">
-            Legal
-          </Text>
-          <List spacing={3}>
-            <ListItem>Cookie Information</ListItem>
-            <ListItem>Privacy Policy</ListItem>
-            <ListItem>Terms & Condition</ListItem>
-            <ListItem>Modern Slavery Statement</ListItem>
-            <ListItem>Coupon Codes</ListItem>
-          </List>
-        </Box>
-        <Box w="20vw" textAlign="left">
-          <Box mb="2rem" h="1.5px" bgColor="grey"></Box>
-          <Text pb=".5rem" fontWeight="600">
-            How To Contact Us
-          </Text>
-          <List spacing={3}>
-            <ListItem>Message Us</ListItem>
-            <ListItem>Free Beauty Consultations</ListItem>
-            <ListItem>Terms & Condition</ListItem>
-          </List>
-        </Box>
-      </Box>
-      <Box mt="4rem" h="1px" mb="3rem" bgColor="black"></Box>
-      <Box>
-        <SimpleGrid
-          columns={2}
-          w="90%"
-          m="auto"
-          pl="2.5%"
-          pr="2.5%"
-          mt="2.2rem"
-        >
-          <Box textAlign="left">
-            <Heading>THG</Heading>
-            <Text display="flex">2022 © The Hut.com Ltd.</Text>
-          </Box>
-          <Box textAlign="left">
-            <Text pb=".5rem" fontWeight="600">
-              Pay Securely
-            </Text>
-            <Box display="flex" gap="10">
-              <FaCcVisa />
-              <FaCcMastercard />
-              <FaCcAmex />
-              <FaPaypal />
-              <FaAlipay />
-              <FaCcStripe />
-            </Box>
-          </Box>
-        </SimpleGrid>
-      </Box>
-    </Box>
+    <Text fontWeight={"500"} fontSize={"lg"} mb={2}>
+      {children}
+    </Text>
   );
 };
-
-export default Footer;
+export default function Footer() {
+  return (
+    <Box>
+      <Container as={Stack} maxW={"6xl"} py={10}>
+        <SimpleGrid
+          templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr" }}
+          spacing={8}
+        >
+          <VStack>
+            <Text pb=".5rem" fontWeight="600" fontSize="md">
+              Sign up to our email list and receive 20% off your next order
+            </Text>
+            <Button
+              fontWeight="600"
+              bgColor="black"
+              color="white"
+              borderRadius="0"
+              _hover={{
+                bg: "cyan.500",
+              }}
+            >
+              SIGN UP
+            </Button>
+          </VStack>
+          <VStack textAlign="left">
+            <Box textAlign="left" color="black">
+              <Text fontSize="md" fontWeight="600">
+                Connect with us
+              </Text>
+              <HStack gap={[2, 3, 4, 5]} p={2}>
+                <Icon
+                  boxSize={[4, 5, 6, 7]}
+                  as={FaFacebook}
+                  color="facebook.500"
+                />
+                <Icon
+                  boxSize={[4, 5, 6, 7]}
+                  as={FaTwitter}
+                  color="twitter.500"
+                />
+                <Icon
+                  boxSize={[4, 5, 6, 7]}
+                  as={FaSnapchat}
+                  color="yellow.400"
+                />
+                <Icon boxSize={[4, 5, 6, 7]} as={FaPinterest} color="red.700" />
+                <Icon boxSize={[4, 5, 6, 7]} as={FaInstagram} color="maroon" />
+              </HStack>
+            </Box>
+          </VStack>
+        </SimpleGrid>
+        {/* Top section uppper end */}
+        <SimpleGrid
+          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 1fr" }}
+          spacing={8}
+        >
+          <Stack align={"flex-start"}>
+            <Divider mb="2" h="2" borderColor={"black"} />
+            <List>
+              <ListHeader> Help & Information</ListHeader>
+              <ListItem>
+                <HStack>
+                  <ListIcon as={PhoneIcon} fontSize="md" color="black.800" />
+                  <Text>Customer Service</Text>
+                </HStack>
+              </ListItem>
+              <ListItem>
+                <HStack>
+                  <ListIcon
+                    as={TbTruckDelivery}
+                    fontSize="md"
+                    color="black.800"
+                  />
+                  <Text>Delivery Information</Text>
+                </HStack>
+              </ListItem>
+              <ListItem>
+                <HStack>
+                  <ListIcon as={TbRefresh} fontSize="md" color="black.800" />
+                  <Text> Return & Refund</Text>
+                </HStack>
+              </ListItem>
+              <ListItem>
+                <HStack>
+                  <ListIcon as={TbHelp} fontSize="md" color="black.800" />
+                  <Text>Help Center</Text>
+                </HStack>
+              </ListItem>
+              <ListItem>
+                <HStack>
+                  <ListIcon
+                    as={MdGpsFixed}
+                    fontSize="1.2rem"
+                    color="black.800"
+                  />
+                  <Text>Track my order</Text>
+                </HStack>
+              </ListItem>
+              <ListItem>
+                <HStack>
+                  <ListIcon as={FaCookie} fontSize="1.2rem" color="black.800" />
+                  <Text>Cookie Setting</Text>
+                </HStack>
+              </ListItem>
+            </List>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <Divider mb="2" h="2" borderColor={"black"} />
+            <ListHeader>Key Workers Discount</ListHeader>
+            <Link href={"#"}>About Us</Link>
+            <Link href={"#"}>Affilate Program</Link>
+            <Link href={"#"}>Brand Directory</Link>
+            <Link href={"#"}>Coupon Codes</Link>
+            <Link href={"#"}>Student Discount</Link>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <Divider mb="2" h="2" borderColor={"black"} />
+            <ListHeader>Legal</ListHeader>
+            <Link href={"#"}>Cookie Information</Link>
+            <Link href={"#"}>Privacy Policy</Link>
+            <Link href={"#"}>Terms & Condition</Link>
+            <Link href={"#"}>Modern Slavery Statement</Link>
+          </Stack>
+          <Stack align={"flex-start"}>
+            <Divider mb="2" h="2" borderColor={"black"} />
+            <ListHeader> How To Contact Us</ListHeader>
+            <Link href={"#"}>Message Us</Link>
+            <Link href={"#"}>Free Beauty Consultations</Link>
+            <Link href={"#"}>Terms & Condition</Link>
+          </Stack>
+        </SimpleGrid>
+      </Container>
+    </Box>
+  );
+}

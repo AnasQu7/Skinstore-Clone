@@ -164,7 +164,8 @@ function CardSlide() {
   const responsive = {
     desktop: { breakpoint: { max: 3000, min: 1024 }, items: 4 },
     tablet: { breakpoint: { max: 1024, min: 703 }, items: 3 },
-    mobile: { breakpoint: { max: 704, min: 0 }, items: 2 },
+    mobile: { breakpoint: { max: 704, min: 349 }, items: 2 },
+    base: { breakpoint: { max: 350, min: 0 }, items: 1 },
   };
 
   return (
@@ -197,13 +198,16 @@ function CardSlide() {
                         </Text>
                       </Box>
                       <Button
+                        w="100%"
+                        fontWeight="600"
                         bgColor="black"
-                        borderRadius="0px"
                         color="white"
-                        mt="10"
-                        w={"100%"}
+                        borderRadius="0"
+                        _hover={{
+                          bg: "cyan.500",
+                        }}
                       >
-                        QUICE BUY
+                        QUICK BUY
                       </Button>
                     </Box>
                   </Link>
