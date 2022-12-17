@@ -11,7 +11,7 @@ const HairCare = () => {
       <Trending />
       <CardSlide />
       <Middle />
-     </div>
+    </div>
   );
 };
 

@@ -5,13 +5,15 @@ import SkinCare from './SkinCare'
 import HairCare from './HairCare'
 import ProductPage from './ProductPage'
 import Admin from './Admin'
+import CartPage from './CartPage'
 export default function AllRoutes() {
   return (<Routes>
       <Route path='/' element={<Homepage/>}/>
       <Route path='/skincare' element={<SkinCare/>}/>
       <Route path='/haircare' element={<HairCare/>}/>
-      <Route path='/Admin' element={<Admin/>}/>
-      <Route path='/Productpage' element={<ProductPage/>}/>
+      <Route path='/admin' element={<Admin/>}/>
+      <Route path='/productpage' element={<ProductPage/>}/>
+      <Route path='/cart' element={<CartPage/>}/>
          </Routes>
     );
 }

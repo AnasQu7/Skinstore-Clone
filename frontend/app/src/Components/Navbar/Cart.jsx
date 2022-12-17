@@ -14,8 +14,10 @@ import {
   } from '@chakra-ui/react'
 import { useState } from 'react';
   import { BsMinecartLoaded } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
   
 function Cart() {
+  const navigate = useNavigate();
   const [cartData] = useState([{
     "id": 1048,
     "brand": "colourpop",
@@ -1007,7 +1009,7 @@ function Cart() {
     <PopoverArrow />
     <PopoverCloseButton />
     <PopoverHeader >
-    <Button colorScheme='teal' variant='outline'>View Cart</Button>
+    <Button colorScheme='teal' onClick={()=>navigate("/cart")} variant='outline'>View Cart</Button>
     </PopoverHeader>
     <PopoverBody>
       <Box maxH='75vh' overflowX='hidden' overflowY='scroll'>

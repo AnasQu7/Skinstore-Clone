@@ -2,6 +2,7 @@ const express = require("express");
 const app = express.Router();
 const { model, Schema } = require("mongoose");
 let ProductModel = require("../models/product.model");
+const jwt = require("jsonwebtoken");
 
 // Get all Product *******************
 
@@ -18,7 +19,7 @@ app.get("/allproduct", async (req, res) => {
 // ****************************limited qunatity alert******************
 app.get("/quantity", async (req, res) => {
   try {
-    let limitedProduct = await ProductModel.find({ quantity: { $lte: 5 } });
+    let limitedProduct = await ProductModel.find({ quantity: { $lt: 5 } });
 
     return res.status(200).send({ limitedProduct });
   } catch (e) {
@@ -59,8 +60,15 @@ app.post("/increasequantity", async (req, res) => {
 // ***********************add new product to the product coolecion of the database*
 app.post("/addnewproduct", async (req, res) => {
   // console.log("hellojnjjbhj");
-  const { name, category, brand, description, price, image_link, quantity } =
-    req.body;
+  const {
+    name,
+    product_type,
+    brand,
+    description,
+    price,
+    image_link,
+    quantity,
+  } = req.body;
 
   try {
     // console.log(
@@ -75,7 +83,7 @@ app.post("/addnewproduct", async (req, res) => {
 
     let newProduct = new ProductModel({
       name,
-      category,
+      product_type,
       brand,
       price,
       image_link,
@@ -84,6 +92,7 @@ app.post("/addnewproduct", async (req, res) => {
     });
 
     await newProduct.save();
+    console.log(newProduct);
     return res.status(200).send({ message: "OK", newProduct });
   } catch (e) {
     return res.send(e.message);
