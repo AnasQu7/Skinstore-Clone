@@ -4,6 +4,9 @@ member-1 - fw19_0603 - Lokesh Ahire
 member-2 - fw19_1038 - Sourav Bandyopadhyay
 member-3 - fw20_1057 - Abhishek Kumar Amber
 member-4 - fw20_1137 - Vivek Belwal
+
+
+
 BRANDS 
 { brand: 'nyx' }
 { brand: 'rejuva minerals' 
@@ -48,21 +51,28 @@ BRANDS
 
 
 Fetch Requests
+
 Fetch Product Type : http://localhost:8080/product?type=(*Product_Type)
+
 Filter Product Data By Brands :  http://localhost:8080/product?type=(*Product_Type)&brand=(*BrandName)
+
 Sort Data By rating : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&rating="asc"
+
                     : Descending Order : http://localhost:8080/product?type=(*Product_Type)&rating="des"
                     
                     
 Sort Data By review : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&review="asc"
+
                     : Descending Order : http://localhost:8080/product?type=(*Product_Type)&review="des"
                     
                     
 Sort Data By price : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&price="asc"
+
                     : Descending Order : http://localhost:8080/product?type=(*Product_Type)&price="des"    
                     
  
  Sort Data By quant : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&quant="asc"
+ 
                     : Descending Order : http://localhost:8080/product?type=(*Product_Type)&quant="des"
    
 
