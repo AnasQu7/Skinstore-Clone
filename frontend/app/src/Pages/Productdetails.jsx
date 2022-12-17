@@ -29,10 +29,12 @@ const Productdetails = () => {
   const [item, setItem] = useState({});
   const params = useParams();
   const url = `https://makeup-api.herokuapp.com/api/v1/products/${params.id}.json`;
-  const bg_list_ing = useColorModeValue("yellow.500", "yellow.300");
-  const bg_category = useColorModeValue("gray.500", "gray.400");
-  const bg_border_color = useColorModeValue("gray.200", "gray.600");
-  const bg_dollar = useColorModeValue("gray.900", "gray.400");
+  const x1 = useColorModeValue("gray.900", "gray.400");
+  const x2 = useColorModeValue("gray.200", "gray.600");
+  const x3 = useColorModeValue("gray.500", "gray.400");
+  const x4 = useColorModeValue("yellow.500", "yellow.300");
+  const x5 = useColorModeValue("gray.900", "gray.50");
+  const x6 = useColorModeValue("white", "gray.900");
   const fetchData = () => {
     axios.get(url).then((res) => {
       console.log(res);
@@ -73,27 +75,18 @@ const Productdetails = () => {
                 >
                   {item.name}
                 </Heading>
-                <Text
-                  color={useColorModeValue("gray.900", "gray.400")}
-                  fontWeight={500}
-                  p={4}
-                  fontSize={"3xl"}
-                >
+                <Text color={x1} fontWeight={500} p={4} fontSize={"3xl"}>
                   ${item.price} USD
                 </Text>
               </Box>
               <Stack
                 spacing={{ base: 4, sm: 6 }}
                 direction={"column"}
-                divider={
-                  <StackDivider
-                    borderColor={useColorModeValue("gray.200", "gray.600")}
-                  />
-                }
+                divider={<StackDivider borderColor={x2} />}
               >
                 <VStack spacing={{ base: 4, sm: 6 }}>
                   <Text
-                    color={useColorModeValue("gray.500", "gray.400")}
+                    color={x3}
                     fontSize={"2xl"}
                     fontWeight={"300"}
                     textTransform={"capitalize"}
@@ -105,7 +98,7 @@ const Productdetails = () => {
                 <Box>
                   <Text
                     fontSize={{ base: "16px", lg: "18px" }}
-                    color={useColorModeValue("yellow.500", "yellow.300")}
+                    color={x4}
                     fontWeight={"500"}
                     textTransform={"uppercase"}
                     mb={"4"}
@@ -140,8 +133,8 @@ const Productdetails = () => {
                 mt={8}
                 size={"lg"}
                 py={"7"}
-                bg={useColorModeValue("gray.900", "gray.50")}
-                color={useColorModeValue("white", "gray.900")}
+                bg={x5}
+                color={x6}
                 textTransform={"uppercase"}
                 _hover={{
                   transform: "translateY(2px)",

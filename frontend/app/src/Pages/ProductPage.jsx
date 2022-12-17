@@ -24,16 +24,17 @@ const ProductPage = () => {
   const [posts, setPosts] = useState([]);
   const [noofElements, setnoofElements] = useState(10);
   const [productype, setProductype] = useState("eyebrow");
-  const [sortBy, setsortBy] = useState("asc");
+  const [sortBy, setsortBy] = useState("des");
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await axios.get(
-        ` http://localhost:8080/product?type=${productype}`
+        ` http://localhost:8080/product?type=${productype?productype:"eyebrow"}&price=${sortBy}`
       );
+      console.log(res.data)
       setPosts(res.data);
     };
     fetchPosts();
-  }, [productype]);
+  }, [productype, sortBy]);
 
   const slice = posts.slice(0, noofElements);
   const loadMore = () => {
@@ -70,8 +71,8 @@ const ProductPage = () => {
       </Box>
 
       <SimpleGrid gap={10} gridTemplateColumns={"1fr 1fr"} p={2}>
-        <HStack display="grid" gridTemplateColumns={"1fr 1fr"} p={2}>
-          <Heading fontWeight="200">Sort By</Heading>
+        <HStack display="grid" gridTemplateColumns={"0.5fr 1.5fr"} p={2}>
+          <Heading fontWeight="200">Brands</Heading>
           <Select
             placeholder="Select option"
             onChange={(e) => setProductype(e.target.value)}
@@ -86,17 +87,34 @@ const ProductPage = () => {
             <option value="lip_liner">Lip Liner</option>
           </Select>
         </HStack>
-       
-        <HStack>
+        {/* <RadioGroup onChange={setProductype} value={productype}>
+            <Stack direction="row">
+              <Radio value="eyeliner">Eyeliner</Radio>
+              <Radio value="foundation">Foundation</Radio>
+            </Stack>
+          </RadioGroup> */}
         <HStack>
           <RadioGroup onChange={setsortBy} value={sortBy}>
             <Stack direction="row">
-              <Radio value="asc">Price High To Low</Radio>
-              <Radio value="des">Price Low To High</Radio>
+              <Radio value="asc">Price Low To High</Radio>
+              <Radio value="des">Price High To Low</Radio>
             </Stack>
           </RadioGroup>
         </HStack>
-        </HStack>
+        {/* WOrking Radio Button dont delete */}
+        {/*  <RadioGroup onChange={setProductype} value={productype}>
+            <Stack direction="row">
+              <Radio value="eyeliner">Eyeliner</Radio>
+              <Radio value="foundation">Foundation</Radio>
+              <Radio value="eyeshadow">Eye Shadow</Radio>
+              <Radio value="lipstick">Lipstick</Radio>
+              <Radio value="mascara">Mascara</Radio>
+              <Radio value="bronzer">Bronzer</Radio>
+              <Radio value="blush">Blush</Radio>
+              <Radio value="nail_polish">Nail Polish</Radio>
+              <Radio value="lip_liner">Lip Liner</Radio>
+            </Stack>
+          </RadioGroup> */}
       </SimpleGrid>
       <Box
         w="95%"
@@ -114,8 +132,8 @@ const ProductPage = () => {
                   {" "}
                   <Image
                     boxSize="270"
-                    alt={el.image_link}
-                    src={el.api_featured_image}
+                    src={el.image_link}
+                    alt={el.name}
                     roundedTop="lg"
                     objectFit={"contain"}
                   />

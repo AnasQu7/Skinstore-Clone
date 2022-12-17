@@ -13,13 +13,14 @@ import {
   } from "@chakra-ui/react";
   import { useState } from "react";
   import { Link, useLocation, useNavigate } from "react-router-dom";
-  import { useAuth } from "../Components/Utilis/Auth";
-  import jwt from "jsonwebtoken";
+import { useAuth } from "../Utilis/Auth";
+
+  // import jwt from "jsonwebtoken";
   export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState("");
-    const auth = useAuth();
+    const auth = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
     const redirectPath = location.state?.path || "/";
@@ -45,10 +46,10 @@ import {
           if (data.status === "OK") {
             alert("Login Successful");
             setUser(data.token);
-            const decode = jwt.decode(data.token, "skin@care");
-            console.log("decode", decode);
-            // auth.login(data.message); -- successful mesg
-            auth.login(decode.name);
+            // const decode = jwt.decode(data.token, "skin@care");
+            // console.log("decode", decode);
+            // // auth.login(data.message); -- successful mesg
+            // auth.login(decode.name);
             // above is decoding
             navigate(redirectPath, { replace: true });
           }
