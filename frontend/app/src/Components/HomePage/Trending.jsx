@@ -1,4 +1,4 @@
-import { Box, Text, SimpleGrid, Image, Button } from "@chakra-ui/react";
+import { Box, Text, SimpleGrid, Image, Button, Center } from "@chakra-ui/react";
 import React from "react";
 
 import { Link } from "react-router-dom";
@@ -14,55 +14,55 @@ const Trending = () => {
       <Text pt="2.5%" fontSize="3rem" mb={10} textAlign="center">
         Shop by Category
       </Text>
-      <SimpleGrid columns={6} spacing={0} w="90%" m="auto" pl="2.5%" pr="2.5%">
-        <Box>
+      <SimpleGrid rowGap="20px" columns={{lg:6,md:3,sm:2,base:2}} spacing={0} w="100%" m="auto" px="100px">
+        <Center><Box>
           <Link to="/">
             <Image
               boxSize="12vw"
               src="https://static.thcdn.com/images/small/webp/widgets/121-us/04/round_widget_ss_homepage_-_Untitled_Page-062904.png"
             />
           </Link>
-        </Box>
-        <Box>
+        </Box></Center>
+        <Center><Box>
           <Link to="/">
             <Image
               boxSize="12vw"
               src="https://static.thcdn.com/images/small/webp/widgets/121-us/06/round_widget_ss_homepage_-_Untitled_Page_%281%29-062906.png"
             />
           </Link>
-        </Box>
-        <Box>
+        </Box></Center>
+        <Center><Box>
           <Link to="/">
             <Image
               boxSize="12vw"
               src="https://static.thcdn.com/images/small/webp/widgets/121-us/06/round_widget_ss_homepage_-_Untitled_Page_%281%29-062906.png"
             />
           </Link>
-        </Box>
-        <Box>
+        </Box></Center>
+        <Center><Box>
           <Link to="/">
             <Image
               boxSize="12vw"
               src="https://static.thcdn.com/images/small/webp/widgets/121-us/11/round_widget_ss_homepage_-_Untitled_Page_%283%29-063011.png"
             />
           </Link>
-        </Box>
-        <Box>
+        </Box></Center>
+        <Center><Box>
           <Link to="/">
             <Image
               boxSize="12vw"
               src="https://static.thcdn.com/images/small/webp/widgets/121-us/07/round_widget_ss_homepage_-_Untitled_Page_%286%29-063207.png"
             />
           </Link>
-        </Box>
-        <Box>
+        </Box></Center>
+        <Center><Box>
           <Link to="/">
             <Image
               boxSize="12vw"
               src="https://static.thcdn.com/images/small/webp/widgets/121-us/32/round_widget_ss_homepage_-_Untitled_Page_%285%29-063132.png"
             />
           </Link>
-        </Box>
+        </Box></Center>
       </SimpleGrid>
 
       <Text pt="2.5%" fontSize="3rem" textAlign="center">
