@@ -86,37 +86,17 @@ const ProductPage = () => {
             <option value="lip_liner">Lip Liner</option>
           </Select>
         </HStack>
-        {/* <RadioGroup onChange={setProductype} value={productype}>
-            <Stack direction="row">
-              <Radio value="eyeliner">Eyeliner</Radio>
-              <Radio value="foundation">Foundation</Radio>
-            </Stack>
-          </RadioGroup> */}
+       
         <HStack>
-          <Button disabled={sortBy === "asc"} onClick={() => setsortBy("asc")}>
-            Ascending
-          </Button>
-          <Button
-            disabled={sortBy === "desc"}
-            onClick={() => setsortBy("desc")}
-          >
-            Descending
-          </Button>
-        </HStack>
-        {/* WOrking Radio Button dont delete */}
-        {/*  <RadioGroup onChange={setProductype} value={productype}>
+        <HStack>
+          <RadioGroup onChange={setsortBy} value={sortBy}>
             <Stack direction="row">
-              <Radio value="eyeliner">Eyeliner</Radio>
-              <Radio value="foundation">Foundation</Radio>
-              <Radio value="eyeshadow">Eye Shadow</Radio>
-              <Radio value="lipstick">Lipstick</Radio>
-              <Radio value="mascara">Mascara</Radio>
-              <Radio value="bronzer">Bronzer</Radio>
-              <Radio value="blush">Blush</Radio>
-              <Radio value="nail_polish">Nail Polish</Radio>
-              <Radio value="lip_liner">Lip Liner</Radio>
+              <Radio value="asc">Price High To Low</Radio>
+              <Radio value="des">Price Low To High</Radio>
             </Stack>
-          </RadioGroup> */}
+          </RadioGroup>
+        </HStack>
+        </HStack>
       </SimpleGrid>
       <Box
         w="95%"
