@@ -11,23 +11,19 @@ ProductRoute.use(express.json());
 
 ProductRoute.get("/", async (req,res) =>{
 
-    // const {category} = req.params;
-    const {type,brand,review,rating,price,quant} = req.query;
-    // const sortByRating =
-    // const sortByReview =  
-    // const id 
-   
 
-    try{
+    const {type,brand,review,rating,price,quant} = req.query;
+  
+   try{
      if(!type){
       return res.send("Bad Request")
      } else {
         if(type && brand){
             const product = await Products.find({product_type :type,brand});
             if(product){
-                res.status(201).send(product)
+               return res.status(201).send(product)
             }else {
-                res.send("Bad Request")
+                return res.send("Bad Request")
             }
         }
         if(type && rating || review || price || quant){
@@ -107,24 +103,25 @@ ProductRoute.get("/", async (req,res) =>{
             
             
         }
-
+        if(type){
+            const product = await Products.find({product_type :type});
+            if(product){
+                res.status(201).send(product)
+            }else {
+                res.send("Bad Request")
+            }
      }
-    }catch(e){
+    }
+ }
+  catch(e){
       console.log(e)
     }
     
-   
-
-   
-})
+   })
 
 ProductRoute.get("/:id", async (req,res) =>{
 
-    // const {category} = req.params;
-    // const {brand} = req.query;
-    // const sortByRating =
-    // const sortByReview =  
-    // const id 
+   
     const {id} = req.params
 
     const product = await Products.find({_id : id});
