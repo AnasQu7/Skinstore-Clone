@@ -89,12 +89,13 @@ const ManageQuantity = () => {
                   <Td>{prod._id}</Td>
                   <Td>{prod.brand}</Td>
 
-                  <Td>{prod.category}</Td>
+                  <Td>{prod.product_type}</Td>
                   <Td>{prod.quantity}</Td>
                   <Td>{prod.price}</Td>
                   <Th>
                     <Input
                       placeholder="QTY"
+                      value={qty}
                       w="25%"
                       onChange={(e) => setQty(Number(e.target.value))}
                     />
