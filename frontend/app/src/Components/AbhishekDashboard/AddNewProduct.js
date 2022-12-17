@@ -10,7 +10,7 @@ import axios from "axios";
 
 let initialState = {
   name: "",
-  category: "",
+  product_type: "",
   brand: "",
   price: 0,
   image_link: "",

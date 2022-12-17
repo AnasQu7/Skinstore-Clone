@@ -19,8 +19,8 @@ const ProductDetails = () => {
     let { data } = await axios.get("http://localhost:8080/admin/allproduct");
     try {
       setProductData(data.product);
-      //   console.log(data);
-      return data;
+      // console.log(data);
+      return;
     } catch (e) {
       return console.log(e.message);
     }
@@ -63,7 +63,7 @@ const ProductDetails = () => {
                   <Td>{prod._id}</Td>
                   <Td>{prod.brand}</Td>
 
-                  <Td>{prod.category}</Td>
+                  <Td>{prod.product_type}</Td>
                   <Td>{prod.quantity}</Td>
                   <Td>{prod.price}</Td>
                   <Td>
