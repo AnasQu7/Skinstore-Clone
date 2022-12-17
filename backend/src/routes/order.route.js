@@ -1,20 +1,86 @@
 const express = require("express");
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 const OrderModel = require("../models/oder.model");
 
 const app = express.Router();
 
+// Get all the order  list  of delivered item *************
+
+app.get("/getdeliveredorder", async (req, res) => {
+  let { token } = req.headers;
+
+  // token = jwt.verify(token, process.env.token_password);
+
+  try {
+    let delivered = await OrderModel.find({ OrderDelivered: true }).populate({
+      path: "cartId",
+      populate: { path: "products", populate: "productId" },
+    });
+
+    return res.status(201).send({ delivered, Message: "OK" });
+  } catch (e) {
+    return res.send("Some thing went wrong");
+  }
+});
+
+// Get list of Order Which is Not delivered
+
+app.get("/getnotdelivered", async (req, res) => {
+  let { token } = req.headers;
+
+  // token = jwt.verify(token, process.env.token_password);
+
+  try {
+    let notDelivered = await OrderModel.find({
+      OrderDelivered: false,
+    }).populate({
+      path: "cartId",
+      populate: { path: "products", populate: "productId" },
+    });
+
+    return res.status(201).send({ notDelivered, Message: "OK" });
+  } catch (e) {
+    return res.send("Some thing went wrong");
+  }
+});
+
+// Get Order details of particluar user with particular order Id
+
+app.get("/getnotdeliveredofuser/:id", async (req, res) => {
+  let { token } = req.headers;
+  let { id } = req.params;
+  // console.log(id);
+
+  token = jwt.verify(token, process.env.token_password);
+  let userId = token.id;
+
+  try {
+    let notDelivered = await OrderModel.find({
+      OrderDelivered: false,
+      userId,
+      _id: id,
+    }).populate({
+      path: "cartId",
+      populate: { path: "products", populate: "productId" },
+    });
+
+    return res.status(201).send({ notDelivered, Message: "OK" });
+  } catch (e) {
+    return res.send("Some thing went wrong");
+  }
+});
+
 //  orderconfirmed*********************
 
 app.post("/", async (req, res) => {
   let { token } = req.headers;
-  const { priceTotal, paymentMethod, DeliveryAdress } = req.body;
+  const { priceTotal, paymentMethod, DeliveryAdress, cartId } = req.body;
 
-  token = jwt.verify(token, "serretKey");
+  token = jwt.verify(token, process.env.token_password);
 
-  const user = await UserModel.findOne({ email: token.email });
-
-  let userId = user._id;
+  let userId = token.id;
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
   var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -26,6 +92,7 @@ app.post("/", async (req, res) => {
   try {
     let neworder = new OrderModel({
       userId,
+      cartId,
       status: ["orderconfirmed"],
       currentStatus: "orderconfirmed",
       priceTotal,
@@ -35,7 +102,7 @@ app.post("/", async (req, res) => {
     });
 
     await neworder.save();
-    return res.status(200).send("OrderConfirmed");
+    return res.status(200).send({ Message: "OK", neworder });
   } catch (e) {
     return res.send(e.message);
   }
@@ -55,7 +122,7 @@ app.post("/changestatus", async (req, res) => {
       return res.status(200).send("Order Delivered");
     }
 
-    const order = await OrderModel.findOne(
+    const order = await OrderModel.findByIdAndUpdate(
       { _id: orderId },
       { $set: { currentStatus: status } }
     );

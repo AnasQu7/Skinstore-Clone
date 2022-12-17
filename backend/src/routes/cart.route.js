@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require("express");
+
 const app = express.Router();
 const jwt = require("jsonwebtoken");
 
@@ -10,16 +12,18 @@ const UserModel = require("../models/user.model");
 
 app.get("/fetchcartItem", async (req, res) => {
   let { token } = req.headers;
-  token = jwt.verify(token, "serretKey");
+  token = jwt.verify(token, process.env.token_password);
 
-  const user = await UserModel.findOne({ email: token.email });
+  let userId = token.id;
 
-  let userId = user._id;
-
-  const cartItem = await CartModel.find({ userId }).populate("productId");
+  let cartItem = await CartModel.find({ userId, active: true }).populate({
+    path: "products",
+    populate: { path: "productId" },
+  });
   try {
     if (cartItem.length > 0) {
-      // cartItem = cartItem.populate("product");
+      // cartItem = cartItem[0].products.populate("product");
+
       console.log(cartItem);
       return res.send(cartItem);
     } else {
@@ -34,30 +38,36 @@ app.get("/fetchcartItem", async (req, res) => {
 app.post("/", async (req, res) => {
   let { token } = req.headers;
   let { productId, qty } = req.body;
-  token = jwt.decode(token, "serretKey");
-  const user = await UserModel.findOne({ email: token.email });
+  token = jwt.decode(token, process.env.token_password);
 
-  let userId = user._id;
+  let userId = token.id;
 
-  let product = await CartModel.findOne({ userId, productId });
-  // console.log(product);
+  let cart = await CartModel.findOne({ userId });
+  // let itemIndex = cart.products.findIndex((p) => p.productId == productId);
+  console.log(cart);
+  console.log("helllo");
+  // return;
   try {
-    if (!product) {
-      let newCartItem = new CartModel({ userId, productId });
+    if (!cart) {
+      let newCartItem = new CartModel({ userId, products: [{ productId }] });
       await newCartItem.save();
+      console.log(newCartItem);
 
-      return res.redirect("/fetchcartItem");
+      return res.status(200).send(newCartItem);
+    } else {
+      let itemIndex = cart.products.findIndex((p) => p.productId == productId);
+
+      if (itemIndex > -1) {
+        let productItem = cart.products[itemIndex];
+        productItem.quantity = productItem.quantity + qty;
+        cart.products[itemIndex] = productItem;
+      } else {
+        cart.products.push({ productId });
+      }
+
+      await cart.save();
+      return res.status(201).send(cart);
     }
-
-    totalQunatity = product.indiVidualQunatity + qty;
-    console.log(totalQunatity);
-
-    let x = await CartModel.updateOne(
-      { userId, productId },
-      { $set: { indiVidualQunatity: totalQunatity } }
-    );
-    console.log(x);
-    return res.redirect("/fetchcartItem");
   } catch (e) {
     return res.send(e.message);
   }
