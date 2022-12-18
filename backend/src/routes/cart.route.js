@@ -12,6 +12,10 @@ const UserModel = require("../models/user.model");
 
 app.get("/fetchcartItem", async (req, res) => {
   let { token } = req.headers;
+
+  if(!token){
+    return res.status(501).send("Not logged in")
+  }
   token = jwt.verify(token, process.env.token_password);
 
   let userId = token.id;
@@ -38,6 +42,9 @@ app.get("/fetchcartItem", async (req, res) => {
 app.post("/", async (req, res) => {
   let { token } = req.headers;
   let { productId, qty } = req.body;
+  if(!token){
+    return res.status(501).send("Not logged in")
+  }
   token = jwt.decode(token, process.env.token_password);
 
   let userId = token.id;
@@ -77,6 +84,9 @@ app.post("/", async (req, res) => {
 app.post("/delete", async (req, res) => {
   let { token } = req.headers;
   let { productId, _id } = req.body;
+  if(!token){
+    return res.status(501).send("Not logged in")
+  }
   token = jwt.decode(token, process.env.token_password);
   let userId = token.id;
   let cart = await CartModel.findOne({ userId, _id });
