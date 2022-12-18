@@ -12,12 +12,47 @@ import {
     Box,
     Button,
     Image,
+    useToast,
   } from '@chakra-ui/react';
 import CartStyle from "./cartStyles.module.css"
 import { RxCrossCircled } from 'react-icons/rx'
 import CartQuantity from './CartQuantity'
-function CartTable({data,fun}) {
+import axios from 'axios';
+import { useAuth } from '../../Utilis/Auth';
+import { useCartLog } from '../../Utilis/Context/CartContext';
+function CartTable({data,fun,cartId}) {
     var cartTotal = 0
+    const {toggleCartLog,cartLog} = useCartLog()
+    const {getUser} = useAuth()
+    const toast = useToast();
+  const toggleRemoveFromCart = (prop)=>{ 
+    const token = getUser()
+    const url = process.env.REACT_APP_BASE_URL
+    const body={
+      productId : prop.id,
+      _id : cartId
+    }
+    // console.log("props",token)
+    // console.log(body)
+    axios.post((url+"/cart/delete"),body,{
+      headers :{
+        token,
+      }      
+    }).then((res)=>{
+      console.log(res.data)
+      toggleCartLog()
+      
+    }).catch((e)=>{
+      toast({
+        title: 'Unauthorized',
+        description: "Login to continue",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      console.log(e.message)
+    })}
+
 console.log("carata",data)
 if(data.length===0){
     return <Box>
@@ -63,7 +98,7 @@ if(data.length===0){
         <Td>{<CartQuantity fun={fun} id={e.productId._id} quantity={e.quantity}/>}</Td>
         <Td>{e.productId.price_sign+(e.quantity?e.quantity*e.productId.price:e.productId.price)}</Td>
         <Td >
-          <Box className={CartStyle.blackHover} w="16px" borderRadius="50%" >
+          <Box  className={CartStyle.blackHover} onClick={()=>{toggleRemoveFromCart({id:e.productId._id})}} w="16px" borderRadius="50%" >
           <RxCrossCircled />
           </Box>
           </Td>
@@ -76,7 +111,7 @@ if(data.length===0){
 </TableContainer>
 <Divider/>
 <Box textAlign="right" w="100%">
-<Text>Cart Subtotal: <span style={{fontWeight:"bold"}}>${cartTotal}</span></Text>
+<Text>Cart Subtotal: <span style={{fontWeight:"bold"}}>₹{cartTotal}</span></Text>
 </Box>
 <Divider/>
       </>
