@@ -9,9 +9,18 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { SearchContext } from '../../Utilis/Context/SearchContext'
 
 import NavStyle from './navbar.module.css'
 function Holiday() {
+  const {toggleUrlQuery} = useContext(SearchContext)
+  const navigate = useNavigate()
+  function toggleSearch(e){
+    toggleUrlQuery({q:e.target.innerHTML})
+      navigate("/productpage")
+  }
 return (
   <Popover trigger='hover'>
   <PopoverTrigger>
@@ -26,40 +35,40 @@ return (
         <Box>
           <Box p="0.2px" bg="grey"></Box>
           <Text mb="5px" p='3px' fontWeight="bold">Popular Categories</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Shop All Holiday Beauty Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Our Favorite Beauty Gift Sets</Text>
-          <Text className={NavStyle.greyHover} p="3px" >SkinStore Exclusive Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >SkinStore's Holiday Edit Box</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Holiday Gift Ideas for Her</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Holiday Gift Ideas for Him</Text>
+          <Text className={NavStyle.greyHover} onClick={toggleSearch} p="3px" >Shop All Holiday Beauty Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Our Favorite Beauty Gift Sets</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >SkinStore Exclusive Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >SkinStore's Holiday Edit Box</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Holiday Gift Ideas for Her</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Holiday Gift Ideas for Him</Text>
         </Box>
         <Box>
           <Box p="0.2px" bg="grey"></Box>
           <Text mb="5px" p='3px' fontWeight="bold">By Gift Idea</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Budget Friendly and  Small Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Stocking Stuffer Ideas</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Thoughtful Gifts for Smart Splurges</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Luxury Holiday Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Last Minute Gift Ideas</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Gifts For You</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Budget Friendly and  Small Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Stocking Stuffer Ideas</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Thoughtful Gifts for Smart Splurges</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Luxury Holiday Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Last Minute Gift Ideas</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Gifts For You</Text>
         </Box>
         <Box>
           <Box p="0.2px" bg="grey"></Box>
           <Text mb="5px" p='3px' fontWeight="bold">By Price</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Gifts Under $25</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Gifts Under $50</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Gifts Under $100</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Gifts Over $100</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Gifts Under $25</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Gifts Under $50</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Gifts Under $100</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Gifts Over $100</Text>
         </Box>
         <Box>
           <Box p="0.2px" bg="grey"></Box>
           <Text mb="5px" p='3px' fontWeight="bold">By Category</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Skin Care Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Body Care Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Home Scents and Candle Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Makeup Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Hair Care Gifts</Text>
-          <Text className={NavStyle.greyHover} p="3px" >Beauty Tools and Hair Styling Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Skin Care Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Body Care Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Home Scents and Candle Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Makeup Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Hair Care Gifts</Text>
+          <Text className={NavStyle.greyHover} p="3px" onClick={toggleSearch} >Beauty Tools and Hair Styling Gifts</Text>
         </Box>
       </Flex>
     </PopoverBody>

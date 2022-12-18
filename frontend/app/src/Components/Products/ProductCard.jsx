@@ -9,6 +9,10 @@ import {
   Tooltip,
   HStack,
   Spinner,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
 } from "@chakra-ui/react";
 
 import { FiShoppingCart } from "react-icons/fi";
@@ -33,6 +37,7 @@ const ProductCard = ({ posts, loading }) => {
       gap={2}
       gridTemplateColumns={["1fr", "1fr 1fr", "1fr 1fr 1fr", "1fr 1fr 1fr"]}
     >
+      
       {!posts
         ? "Not Found"
         : posts.map((el) => (
@@ -59,8 +64,9 @@ const ProductCard = ({ posts, loading }) => {
                 {el.name}
               </Heading>
               <Text fontSize="lg" fontWeight="600" textAlign="center" p={2}>
-                $ {el.price}
+              ₹ {el.price}
               </Text>{" "}
+              
               <HStack
                 height="50"
                 p={1}

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Box,
@@ -22,13 +22,51 @@ import {
   TagCloseButton,
   Badge,
   Divider,
+  useToast,
 } from "@chakra-ui/react";
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { MdLocalShipping } from "react-icons/md";
+import {  useAuth } from "../Utilis/Auth";
+import { useCartLog } from "../Utilis/Context/CartContext";
+
+
 const Productdetails = () => {
+  const {toggleCartLog} = useCartLog()
+  const {getUser} = useAuth()
+  const user = getUser()
   const [item, setItem] = useState({});
   const params = useParams();
-  const url = `https://makeup-api.herokuapp.com/api/v1/products/${params.id}.json`;
+  const toast = useToast();
+  const toggleAddToCart = (prop)=>{ 
+    const url = process.env.REACT_APP_BASE_URL
+    console.log(prop)
+    const body={
+      productId : prop.id,
+      qty : 1
+    }
+    console.log(body)
+    axios.post((url+"/cart"),body,{
+      headers :{
+        token : user
+      }
+      
+    }).then((res)=>{
+      console.log(res.data)
+      toggleCartLog()
+      
+    }).catch((e)=>{
+      toast({
+        title: 'Unauthorized',
+        description: "Login to continue",
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      console.log(e.message)
+    })}
+
+
+  const url = process.env.REACT_APP_BASE_URL
   const x1 = useColorModeValue("gray.900", "gray.400");
   const x2 = useColorModeValue("gray.200", "gray.600");
   const x3 = useColorModeValue("gray.500", "gray.400");
@@ -36,7 +74,7 @@ const Productdetails = () => {
   const x5 = useColorModeValue("gray.900", "gray.50");
   const x6 = useColorModeValue("white", "gray.900");
   const fetchData = () => {
-    axios.get(url).then((res) => {
+    axios.get(`${url}/product/${params.id}`).then((res) => {
       console.log(res);
       setItem(res.data);
     });
@@ -49,7 +87,7 @@ const Productdetails = () => {
       {!item ? (
         "Not Found"
       ) : (
-        <Container maxW={"7xl"} p={4}>
+        <Container mt="150px" maxW={"7xl"} p={4}>
           <SimpleGrid
             columns={{ base: 1, lg: 2 }}
             spacing={{ base: 8, md: 10 }}
@@ -59,7 +97,7 @@ const Productdetails = () => {
               <Image
                 rounded={"md"}
                 alt={item.image_link}
-                src={item.api_featured_image}
+                src={item.image_link1}
                 objectFit={"contain"}
                 align={"center"}
                 w={"100%"}
@@ -140,6 +178,7 @@ const Productdetails = () => {
                   transform: "translateY(2px)",
                   boxShadow: "lg",
                 }}
+                onClick = {()=>{toggleAddToCart({id:params.id})}}
               >
                 Add to cart
               </Button>

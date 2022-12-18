@@ -16,9 +16,9 @@ import {
 import CartStyle from "./cartStyles.module.css"
 import { RxCrossCircled } from 'react-icons/rx'
 import CartQuantity from './CartQuantity'
-function CartTable({data}) {
+function CartTable({data,fun}) {
     var cartTotal = 0
-console.log(data)
+console.log("carata",data)
 if(data.length===0){
     return <Box>
         <Divider/>
@@ -43,25 +43,25 @@ if(data.length===0){
     </Thead>
     <Tbody>
       {data.map((e)=>{
-         cartTotal += (+e.price);
+         cartTotal +=( (+e.productId.price)*e.quantity);
           return<Tr>
         <Td>
             <Box display='flex' justifyContent='center' w="150px" h="150px" alignItems='center'>
-               <Image h="100%" src={e.api_featured_image}/>
+               <Image h="100%" src={e.productId.image_link}/>
             </Box>
         </Td>
         <Td>
             <Box display='flex' flexDir="column" h="170px" justifyContent='space-around' maxW="100px">
            <Box>
-            <Text w="100%" fontWeight='semibold' mb="5px" fontSize='20px'>{e.name}</Text>
-            <Text fontWeight="bold" textTransform='uppercase' fontSize='10px' w="100%">{e.brand}</Text>
+            <Text w="100%" fontWeight='semibold' mb="5px" fontSize='20px'>{e.productId.name}</Text>
+            <Text fontWeight="bold" textTransform='uppercase' fontSize='10px' w="100%">{e.productId.brand}</Text>
             </Box>
            <Button px="70px">Add to Whishlist</Button>
             </Box>
             </Td>
-        <Td>{e.price_sign+e.price}</Td>
-        <Td>{<CartQuantity quantity={e.quantity}/>}</Td>
-        <Td>{e.price_sign+(e.quantity?e.quantity*e.price:e.price)}</Td>
+        <Td>{e.productId.price_sign+e.productId.price}</Td>
+        <Td>{<CartQuantity fun={fun} id={e.productId._id} quantity={e.quantity}/>}</Td>
+        <Td>{e.productId.price_sign+(e.quantity?e.quantity*e.productId.price:e.productId.price)}</Td>
         <Td >
           <Box className={CartStyle.blackHover} w="16px" borderRadius="50%" >
           <RxCrossCircled />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SimpleGrid, Box, Button } from "@chakra-ui/react";
+import { SimpleGrid, Box, Button, Center } from "@chakra-ui/react";
 import {
   Table,
   Thead,
@@ -23,13 +23,10 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon, EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import axios from "axios";
-
 const OrderManagement = () => {
   const [edit, setEdit] = useState();
   const [orderList, setOrderList] = useState([]);
-
-  // const [totalIncome, setTotalIncome] = useState();
-
+  const [totalIncome, setTotalIncome] = useState();
   function EditableControls() {
     const {
       isEditing,
@@ -37,7 +34,6 @@ const OrderManagement = () => {
       getCancelButtonProps,
       getEditButtonProps,
     } = useEditableControls();
-
     return isEditing ? (
       <ButtonGroup justifyContent="center" size="sm">
         <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
@@ -49,33 +45,44 @@ const OrderManagement = () => {
       </Flex>
     );
   }
-
-  const handleEdit = (id) => {
+  // make the api request to change the status
+  const handleEdit = async (id) => {
     if (edit !== undefined) {
-      console.log(edit, id);
+      await axios.post("http://localhost:8080/order/changestatus", {
+        orderId: id,
+        status: edit,
+      });
+      try {
+        // console.log(data);
+        getListOfOrder();
+      } catch (e) {
+        return console.log(e);
+      }
     }
-    // make the api request to change the status
   };
-
   useEffect(() => {
     // make the api call for total income of the day******
   }, []);
-
   //  pedning order and pending items************
-
   useEffect(() => {}, []);
-
   // total income of the day*************
-
-  useEffect(() => {}, []);
-
+  const getTotalIncome = async () => {
+    let { data } = await axios.get("http://localhost:8080/order/totalincome");
+    try {
+      // console.log(data);
+      setTotalIncome(data.total);
+    } catch (e) {
+      return console.log(e);
+    }
+  };
+  useEffect(() => {
+    getTotalIncome();
+  }, []);
   // get all the non delived items
-
   const getListOfOrder = async () => {
     let { data } = await axios.get(
       "http://localhost:8080/order/getnotdelivered"
     );
-
     try {
       setOrderList(data.notDelivered);
       return;
@@ -87,24 +94,27 @@ const OrderManagement = () => {
   useEffect(() => {
     getListOfOrder();
   }, []);
-
   return (
     <div>
       <SimpleGrid columns={4} spacing={10} p="40px">
-        <Box bg="tomato" minimumheight="120px">
+        <Center
+          bg="tomato"
+          minimumheight="120px"
+          fontSize="30px"
+          fontWeight="600"
+        >
           Pending
-        </Box>
-        <Box bg="tomato" height="120px">
+        </Center>
+        <Center bg="tomato" height="120px" fontSize="30px" fontWeight="600">
           OrderCancel
-        </Box>
-        <Box bg="tomato" height="120px">
+        </Center>
+        <Center bg="tomato" height="120px" fontSize="30px" fontWeight="600">
           Order Process
-        </Box>
-        <Box bg="tomato" height="120px">
-          Total Income
-        </Box>
+        </Center>
+        <Center bg="tomato" height="120px" fontSize="30px" fontWeight="600">
+          Total Income :{totalIncome}
+        </Center>
       </SimpleGrid>
-
       <TableContainer>
         <Table variant="simple">
           <Thead>
@@ -161,5 +171,4 @@ const OrderManagement = () => {
     </div>
   );
 };
-
 export default OrderManagement;

@@ -6,7 +6,6 @@ import {
   Image,
   Button,
   Heading,
-  useColorModeValue,
   Center,
   HStack,
   Icon,
@@ -15,31 +14,45 @@ import {
   Select,
   Stack,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Alert,
+  AlertIcon,
+  AlertTitle
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import axios from "axios";
+import { useContext } from "react";
+import { SearchContext } from "../Utilis/Context/SearchContext";
 // "https://makeup-api.herokuapp.com/api/v1/products.json"
 const ProductPage = () => {
+  const {urlQuery,toggleUrlQuery} = useContext(SearchContext)
   const [posts, setPosts] = useState([]);
   const [noofElements, setnoofElements] = useState(10);
-  const [productype, setProductype] = useState("eyebrow");
-  const [sortBy, setsortBy] = useState("des");
+  const [sortBy, setsortBy] = useState(null);
+  const [load , setLoad] = useState(false)
   useEffect(() => {
     const fetchPosts = async () => {
+      // console.log(query)'
+      setLoad(true)
       const res = await axios.get(
-        ` http://localhost:8080/product?type=${productype?productype:"eyebrow"}&price=${sortBy}`
+        `http://localhost:8080/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`
       );
-      console.log(res.data)
+      console.log(urlQuery)
+      console.log(`http://localhost:8080/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`)
+     console.log(res.data)
       setPosts(res.data);
+      setLoad(false)
     };
     fetchPosts();
-  }, [productype, sortBy]);
+  }, [ sortBy,urlQuery]);
 
   const slice = posts.slice(0, noofElements);
   const loadMore = () => {
     setnoofElements(noofElements + noofElements);
   };
+  if(load){
+    return <Image m="auto" mt="150px" src="https://media.tenor.com/28DFFVtvNqYAAAAC/loading.gif"/>
+  }
   return (
     <>
       <Box
@@ -49,7 +62,7 @@ const ProductPage = () => {
         bg="blackAlpha.800"
         color="white"
         _hover={{ bg: "white", color: "black" }}
-        marginTop="2"
+        marginTop="150px"
         marginBottom="2"
       >
         <Text fontSize="lg" fontWeight="600">
@@ -75,7 +88,7 @@ const ProductPage = () => {
           <Heading fontWeight="200">Brands</Heading>
           <Select
             placeholder="Select option"
-            onChange={(e) => setProductype(e.target.value)}
+            onChange={(e) => toggleUrlQuery({q:e.target.value})}
           >
             <option value="eyeliner">Eyeliner</option>
             <option value="foundation">Foundation</option>
@@ -116,7 +129,7 @@ const ProductPage = () => {
             </Stack>
           </RadioGroup> */}
       </SimpleGrid>
-      <Box
+     {slice.length!==0 ?<Box
         w="95%"
         margin="auto"
         display="grid"
@@ -128,6 +141,10 @@ const ProductPage = () => {
           slice.map((el, index) => (
             <Center py={6} key={index}>
               <Box key={el.id} rounded="lg" shadow="md" position="relative">
+              { el.quantity<1?<Alert status='error'>
+                <AlertIcon/>
+                <AlertTitle>Out Of Stock!</AlertTitle>
+              </Alert>:""}
                 <Box>
                   {" "}
                   <Image
@@ -136,6 +153,10 @@ const ProductPage = () => {
                     alt={el.name}
                     roundedTop="lg"
                     objectFit={"contain"}
+                    onError={(e)=>{
+                      e.target.src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsNGGjrfSqqv8UjL18xS4YypbK-q7po_8oVQ&usqp=CAU"
+                      e.onError = null
+                    }}
                   />
                 </Box>
                 <Heading
@@ -174,7 +195,7 @@ const ProductPage = () => {
                     fontSize={"1.2em"}
                   >
                     <chakra.a
-                      href={`/product/${el.id}`}
+                      href={`/product/${el._id}`}
                       display={"flex"}
                       margin="auto"
                     >
@@ -196,7 +217,7 @@ const ProductPage = () => {
               </Box>
             </Center>
           ))}
-      </Box>
+      </Box>:<Image m="auto" src="https://ih1.redbubble.net/image.1304795334.8057/pp,840x830-pad,1000x1000,f8f8f8.jpg"/>}
 
       <Button
         fontWeight="600"

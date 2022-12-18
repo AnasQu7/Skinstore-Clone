@@ -14,6 +14,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { FaHamburger } from "react-icons/fa";
 
 const Sidebar = ({ displayFunction }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,7 +22,7 @@ const Sidebar = ({ displayFunction }) => {
 
   return (
     <>
-      <SimpleGrid
+      {/* <SimpleGrid
         columns={1}
         spacing={10}
         bg="teal"
@@ -31,21 +32,21 @@ const Sidebar = ({ displayFunction }) => {
       >
         <HStack>
           <Center w="80px" h="40px" color="white">
-            <Button ref={btnRef} colorScheme="teal" onClick={onOpen}>
-              Menu
-            </Button>
           </Center>
         </HStack>
 
         <Menu>
           <MenuButton as={Button} colorScheme="pink">
-            Profile
+          Profile
           </MenuButton>
           <MenuList>
-            <MenuItem>Logout</MenuItem>
+          <MenuItem>Logout</MenuItem>
           </MenuList>
         </Menu>
-      </SimpleGrid>
+      </SimpleGrid> */}
+        <Button position='fixed' left="50px" p="10px" bottom="50px" colorScheme='teal' ref={btnRef} onClick={onOpen}>
+          <FaHamburger size="30px"/>
+        </Button>
 
       <Drawer
         isOpen={isOpen}
@@ -57,13 +58,13 @@ const Sidebar = ({ displayFunction }) => {
         <DrawerContent>
           <DrawerCloseButton />
 
-          <DrawerBody>
-            <Menu>
+          <DrawerBody position='relative'  zIndex={4000}>
+            <Menu >
               <MenuItem
                 _hover={{ bg: "teal", color: " white" }}
                 as="h3"
                 size="md"
-                mt="25px"
+                mt="150px"
                 color="Brown"
                 fontSize="25px"
                 onClick={() => {
@@ -77,7 +78,7 @@ const Sidebar = ({ displayFunction }) => {
                 _hover={{ bg: "teal", color: " white" }}
                 as="h3"
                 size="md"
-                mt="25px"
+                mt="10px"
                 color="Brown"
                 fontSize="25px"
                 onClick={() => {
@@ -92,7 +93,7 @@ const Sidebar = ({ displayFunction }) => {
                 _hover={{ bg: "teal", color: " white" }}
                 as="h3"
                 size="md"
-                mt="25px"
+                mt="10px"
                 color="Brown"
                 fontSize="25px"
                 onClick={() => {
@@ -107,7 +108,7 @@ const Sidebar = ({ displayFunction }) => {
                 _hover={{ bg: "teal", color: " white" }}
                 as="h3"
                 size="md"
-                mt="25px"
+                mt="10px"
                 color="Brown"
                 fontSize="25px"
                 onClick={() => {
@@ -122,7 +123,7 @@ const Sidebar = ({ displayFunction }) => {
                 _hover={{ bg: "teal", color: " white" }}
                 as="h3"
                 size="md"
-                mt="25px"
+                mt="10px"
                 color="Brown"
                 fontSize="25px"
                 onClick={() => {
@@ -137,7 +138,7 @@ const Sidebar = ({ displayFunction }) => {
                 _hover={{ bg: "teal", color: " white" }}
                 as="h3"
                 size="md"
-                mt="25px"
+                mt="10px"
                 color="Brown"
                 fontSize="25px"
                 onClick={() => {
