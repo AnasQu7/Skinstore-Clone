@@ -11,18 +11,21 @@ import {
     Text,
     useColorModeValue
   } from "@chakra-ui/react";
+
   import { useState } from "react";
   import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Utilis/Auth";
 
   // import jwt from "jsonwebtoken";
   export default function Login() {
+    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useState("");
-    const auth = useAuth()
+    const {auth,login} = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
+ 
     const redirectPath = location.state?.path || "/";
     const handleLogin = (e) => {
       e.preventDefault();
@@ -42,9 +45,11 @@ import { useAuth } from "../Utilis/Auth";
         .then((res) => res.json())
         .then((data) => {
           // console.log(data, "UserRegister");
-          console.log(data);
           if (data.status === "OK") {
             alert("Login Successful");
+            
+            login(data);
+            console.log("scscsc",auth)
             setUser(data.token);
             // const decode = jwt.decode(data.token, "skin@care");
             // console.log("decode", decode);
@@ -54,7 +59,7 @@ import { useAuth } from "../Utilis/Auth";
             navigate(redirectPath, { replace: true });
           }
         })
-        .catch(() => alert("ERROR"));
+        .catch((e) => alert("ERROR",e.message));
     };
   
     return (

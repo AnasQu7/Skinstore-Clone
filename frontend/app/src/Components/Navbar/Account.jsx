@@ -12,8 +12,10 @@ import {
     Text,
   } from '@chakra-ui/react'
   import { RxPerson } from 'react-icons/rx';
+import { useNavigate } from 'react-router-dom';
   import NavStyle from './navbar.module.css'
 function Account() {
+  const navigate = useNavigate()
   return (
     <Popover trigger='hover'>
   <PopoverTrigger>
@@ -24,8 +26,8 @@ function Account() {
     <PopoverCloseButton />
     <PopoverHeader pt="40px" bg='#f9f9f9'>
         <Flex flexDir="column" rowGap="20px">
-        <Button colorScheme="blackAlpha" variant="solid">Login</Button>
-        <Button colorScheme="black" variant="outline">Sign Up</Button>
+        <Button onClick={()=>navigate("/login")} colorScheme="blackAlpha" variant="solid">Login</Button>
+        <Button onClick={()=>navigate("/register")} colorScheme="black" variant="outline">Sign Up</Button>
         </Flex>
     </PopoverHeader>
     <PopoverBody p="0px">

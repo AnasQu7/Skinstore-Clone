@@ -5,6 +5,7 @@ import UserDetails from "../Components/AbhishekDashboard/UserDetails";
 import ManageQuantity from "../Components/AbhishekDashboard/ManageQunatity";
 import OrderManagement from "../Components/AbhishekDashboard/OrderManagement";
 import ProductDetails from "../Components/AbhishekDashboard/ProductDetails";
+import OrderDetails from "../Components/AbhishekDashboard/OrderDetails";
 
 const Admin = () => {
   const [dispalyStatus, setStatusDisplay] = useState("OrderManagement");
@@ -16,7 +17,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="container">
+    <div style={{marginTop:"150px",minHeight:"70vh",marginBottom:"50px"}} className="container">
       <div className="sidebar">
         <Sidebar displayFunction={displayFunction} />
       </div>
@@ -61,6 +62,14 @@ const Admin = () => {
         >
           {" "}
           <ManageQuantity />
+        </div>
+        <div
+          style={{
+            display: dispalyStatus === "SeeOrderDetails" ? "block" : "none",
+          }}
+        >
+          {" "}
+          <OrderDetails />
         </div>
       </div>
     </div>
