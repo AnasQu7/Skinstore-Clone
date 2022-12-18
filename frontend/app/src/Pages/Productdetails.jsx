@@ -97,7 +97,7 @@ const Productdetails = () => {
               <Image
                 rounded={"md"}
                 alt={item.image_link}
-                src={item.image_link1}
+                src={item.image_link}
                 objectFit={"contain"}
                 align={"center"}
                 w={"100%"}

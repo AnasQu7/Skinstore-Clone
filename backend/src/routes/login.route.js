@@ -28,7 +28,7 @@ LoginRoute.post("/",async (req,res) =>{
                             }, 
                             process.env.refresh_password,
                             {expiresIn : "7days"})
-                            res.status(201).json({token , refreshToken, message : "Login Successful",status : "OK"})
+                            res.status(201).json({token , refreshToken, message : "Login Successful",status : "OK",user:user.name , role : user.role , phone : user.phone , email : user.email})
                      
                  }
              }
