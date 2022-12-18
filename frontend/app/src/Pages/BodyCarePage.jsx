@@ -26,7 +26,7 @@ import {
       const fetchPosts = async () => {
         setLoading(true);
         const res = await axios.get(
-          ` https://makeup-api.herokuapp.com/api/v1/products.json?product_type=bronzer&product_tags=${tag}`
+          `https://makeup-api.herokuapp.com/api/v1/products.json?product_type=bronzer&product_tags=${tag}`
         );
         console.log("bodycare", res.data);
         setBody(res.data);

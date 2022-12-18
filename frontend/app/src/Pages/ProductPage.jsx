@@ -34,8 +34,9 @@ const ProductPage = () => {
     const fetchPosts = async () => {
       // console.log(query)'
       setLoad(true)
+      const url = process.env.REACT_APP_BASE_URL
       const res = await axios.get(
-        `http://localhost:8080/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`
+        `${url}?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`
       );
       console.log(urlQuery)
       console.log(`http://localhost:8080/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`)

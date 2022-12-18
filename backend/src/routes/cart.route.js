@@ -73,4 +73,34 @@ app.post("/", async (req, res) => {
   }
 });
 
+// ****************Remove from Cart******************
+app.post("/delete", async (req, res) => {
+  let { token } = req.headers;
+  let { productId, _id } = req.body;
+  token = jwt.decode(token, process.env.token_password);
+  let userId = token.id;
+  let cart = await CartModel.findOne({ userId, _id });
+  // let itemIndex = cart.products.findIndex((p) => p.productId == productId);
+  // console.log(cart);
+  // return;
+  try {
+    if (!cart) {
+      return res
+        .status(401)
+        .send("There is no no any cart to remove the product");
+    } else {
+      let itemIndex = cart.products.findIndex((p) => p.productId == productId);
+      if (cart.products.length === 1) {
+        await CartModel.findByIdAndDelete({ _id });
+      } else {
+        cart.products.splice(itemIndex, 1);
+      }
+      await cart.save();
+      console.log(cart);
+      return res.status(201).send(cart);
+    }
+  } catch (e) {
+    return res.send(e.message);
+  }
+});
 module.exports = app;

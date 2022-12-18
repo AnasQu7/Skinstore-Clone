@@ -29,7 +29,8 @@ import { useAuth } from "../Utilis/Auth";
     const redirectPath = location.state?.path || "/";
     const handleLogin = (e) => {
       e.preventDefault();
-      fetch("http://localhost:8080/login", {
+      const url = process.env.REACT_APP_BASE_URL
+      fetch(`${url}/login`, {
         method: "POST",
         crossDomain: true,
         headers: {

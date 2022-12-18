@@ -29,7 +29,8 @@ import {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log({ name, address, email, password });
-      fetch("http://localhost:8080/signup", {
+      const url = process.env.REACT_APP_BASE_URL
+      fetch(`${url}/signup`, {
         method: "POST",
         crossDomain: true,
         headers: {
