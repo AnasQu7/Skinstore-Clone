@@ -95,7 +95,6 @@ const ManageQuantity = () => {
                   <Th>
                     <Input
                       placeholder="QTY"
-                      value={qty}
                       w="25%"
                       onChange={(e) => setQty(Number(e.target.value))}
                     />

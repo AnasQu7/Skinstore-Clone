@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SimpleGrid, Box, Button, Center } from "@chakra-ui/react";
+import { SimpleGrid, Button, Center } from "@chakra-ui/react";
 import {
   Table,
   Thead,
