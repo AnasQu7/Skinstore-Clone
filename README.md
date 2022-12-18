@@ -52,29 +52,29 @@ BRANDS
 
 Fetch Requests
 
-Fetch Product Type : http://localhost:8080/product?type=(*Product_Type)
+Fetch Product Type : https://skin-care-hub.onrender.com/product?type=(*Product_Type)
 
-Filter Product Data By Brands :  http://localhost:8080/product?type=(*Product_Type)&brand=(*BrandName)
+Filter Product Data By Brands :  https://skin-care-hub.onrender.com/product?type=(*Product_Type)&brand=(*BrandName)
 
-Sort Data By rating : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&rating=asc
+Sort Data By rating : Ascending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&rating=asc
 
-                    : Descending Order : http://localhost:8080/product?type=(*Product_Type)&rating=des
+                    : Descending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&rating=des
                     
                     
-Sort Data By review : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&review=asc
+Sort Data By review : Ascending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&review=asc
 
-                    : Descending Order : http://localhost:8080/product?type=(*Product_Type)&review=des
+                    : Descending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&review=des
                     
                     
-Sort Data By price : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&price=asc
+Sort Data By price : Ascending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&price=asc
 
-                    : Descending Order : http://localhost:8080/product?type=(*Product_Type)&price=des    
+                    : Descending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&price=des    
                     
  
- Sort Data By quant : Ascending Order : http://localhost:8080/product?type=(*Product_Type)&quant=asc
+ Sort Data By quant : Ascending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&quant=asc
  
-                    : Descending Order : http://localhost:8080/product?type=(*Product_Type)&quant=des
+                    : Descending Order : https://skin-care-hub.onrender.com/product?type=(*Product_Type)&quant=des
    
 
-Product Details Page Request :  http://localhost:8080/product/(ID of Product)
+Product Details Page Request :  https://skin-care-hub.onrender.com/product/(ID of Product)
                     
