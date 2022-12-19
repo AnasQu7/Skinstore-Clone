@@ -17,7 +17,7 @@ function CartQuantity({quantity,id,fun}) {
         qty : x
       }
       console.log(body)
-      axios.post((url+"/cart"),body,{
+      axios.post(("https://skin-care-hub.onrender.com"+"/cart"),body,{
         headers :{
           token : user
         }

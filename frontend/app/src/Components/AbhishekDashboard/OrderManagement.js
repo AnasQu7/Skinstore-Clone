@@ -48,7 +48,7 @@ const OrderManagement = () => {
   // make the api request to change the status
   const handleEdit = async (id) => {
     if (edit !== undefined) {
-      await axios.post("http://localhost:8080/order/changestatus", {
+      await axios.post("https://skin-care-hub.onrender.com/order/changestatus", {
         orderId: id,
         status: edit,
       });
@@ -67,7 +67,7 @@ const OrderManagement = () => {
   useEffect(() => {}, []);
   // total income of the day*************
   const getTotalIncome = async () => {
-    let { data } = await axios.get("http://localhost:8080/order/totalincome");
+    let { data } = await axios.get("https://skin-care-hub.onrender.com/order/totalincome");
     try {
       // console.log(data);
       setTotalIncome(data.total);
@@ -81,7 +81,7 @@ const OrderManagement = () => {
   // get all the non delived items
   const getListOfOrder = async () => {
     let { data } = await axios.get(
-      "http://localhost:8080/order/getnotdelivered"
+      "https://skin-care-hub.onrender.com/order/getnotdelivered"
     );
     try {
       setOrderList(data.notDelivered);

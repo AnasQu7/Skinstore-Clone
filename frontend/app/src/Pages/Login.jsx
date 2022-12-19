@@ -30,7 +30,7 @@ import { useAuth } from "../Utilis/Auth";
     const handleLogin = (e) => {
       e.preventDefault();
       const url = process.env.REACT_APP_BASE_URL
-      fetch(`${url}/login`, {
+      fetch(`https://skin-care-hub.onrender.com/login`, {
         method: "POST",
         crossDomain: true,
         headers: {

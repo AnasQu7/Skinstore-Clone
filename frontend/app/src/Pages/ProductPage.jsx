@@ -36,10 +36,10 @@ const ProductPage = () => {
       setLoad(true)
       
       const res = await axios.get(
-        `http://localhost:8080/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`
+        `https://skin-care-hub.onrender.com/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`
       );
       console.log(urlQuery)
-      console.log(`http://localhost:8080/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`)
+      console.log(`https://skin-care-hub.onrender.com/product?l=all${sortBy?"price="+sortBy:""}${urlQuery.brand?"&brand="+urlQuery.brand:""}${urlQuery.type?"&type="+urlQuery.type:""}${urlQuery.q?"&q="+urlQuery.q:""}`)
      console.log(res.data)
       setPosts(res.data);
       setLoad(false)
@@ -173,7 +173,7 @@ const ProductPage = () => {
                   {el.name}
                 </Heading>
                 <Text fontSize="lg" fontWeight="600" textAlign="center" p={1}>
-                  $ {el.price}
+                ₹ {el.price}
                 </Text>{" "}
                 <HStack
                   p={1}

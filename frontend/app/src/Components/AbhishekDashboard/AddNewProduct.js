@@ -28,7 +28,7 @@ const AddNewProduct = () => {
   const handleSubmit = async () => {
     // console.log(newProduct);
 
-    await axios.post("http://localhost:8080/admin/addnewproduct", newProduct);
+    await axios.post("https://skin-care-hub.onrender.com/admin/addnewproduct", newProduct);
     try {
       alert("ok");
       //   console.log(data);

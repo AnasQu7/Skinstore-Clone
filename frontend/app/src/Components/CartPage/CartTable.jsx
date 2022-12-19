@@ -34,7 +34,7 @@ function CartTable({data,fun,cartId}) {
     }
     // console.log("props",token)
     // console.log(body)
-    axios.post((url+"/cart/delete"),body,{
+    axios.post(("https://skin-care-hub.onrender.com"+"/cart/delete"),body,{
       headers :{
         token,
       }      

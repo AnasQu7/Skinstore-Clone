@@ -16,7 +16,7 @@ import { DeleteIcon } from "@chakra-ui/icons";
 const ProductDetails = () => {
   const [productData, setProductData] = useState([]);
   const getProductData = async () => {
-    let { data } = await axios.get("http://localhost:8080/admin/allproduct");
+    let { data } = await axios.get("https://skin-care-hub.onrender.com/admin/allproduct");
     try {
       setProductData(data.product);
       // console.log(data);
@@ -26,7 +26,7 @@ const ProductDetails = () => {
     }
   };
   const handleDataDelete = (id) => {
-    axios.post("http://localhost:8080/admin/deleteproduct", {
+    axios.post("https://skin-care-hub.onrender.com/admin/deleteproduct", {
       id,
     });
     try {

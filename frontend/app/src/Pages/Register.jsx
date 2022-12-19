@@ -30,7 +30,8 @@ import {
       e.preventDefault();
       console.log({ name, address, email, password });
       const url = process.env.REACT_APP_BASE_URL
-      fetch(`${url}/signup`, {
+      console.log(url)
+      fetch(`https://skin-care-hub.onrender.com/signup`, {
         method: "POST",
         crossDomain: true,
         headers: {

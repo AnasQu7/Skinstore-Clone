@@ -18,7 +18,7 @@ const ManageQuantity = () => {
   const [productData, setProductData] = useState([]);
   const [qty, setQty] = useState();
   const getProductData = async () => {
-    let { data } = await axios.get("http://localhost:8080/admin/quantity");
+    let { data } = await axios.get("https://skin-care-hub.onrender.com/admin/quantity");
     try {
       setProductData(data.limitedProduct);
       // console.log(data);
@@ -28,7 +28,7 @@ const ManageQuantity = () => {
     }
   };
   const handleDataDelete = (id) => {
-    axios.post("http://localhost:8080/admin/deleteproduct", {
+    axios.post("https://skin-care-hub.onrender.com/admin/deleteproduct", {
       id,
     });
     try {
@@ -48,7 +48,7 @@ const ManageQuantity = () => {
       return alert("Please provide QTY");
     }
 
-    await axios.post("http://localhost:8080/admin/increasequantity", {
+    await axios.post("https://skin-care-hub.onrender.com/admin/increasequantity", {
       id,
       qty,
     });

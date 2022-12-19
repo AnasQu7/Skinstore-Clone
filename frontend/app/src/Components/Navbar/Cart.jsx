@@ -30,7 +30,7 @@ function Cart() {
     const url = process.env.REACT_APP_BASE_URL
     const token = getUser()
     console.log(token)
-    axios.get(url+"/cart/fetchcartItem",{
+    axios.get("https://skin-care-hub.onrender.com"+"/cart/fetchcartItem",{
       headers :{
         token :token
       }

@@ -18,7 +18,7 @@ const UserDetails = () => {
   const [userData, setUserData] = useState([]);
 
   const getuserDetails = async () => {
-    let { data } = await axios.get("http://localhost:8080/user");
+    let { data } = await axios.get("https://skin-care-hub.onrender.com/user");
 
     try {
       //   console.log(data.user);
@@ -31,7 +31,7 @@ const UserDetails = () => {
 
   const handleDataDelete = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:8080/user/deleteproduct/${id}`, { id });
+    axios.delete(`https://skin-care-hub.onrender.com/user/deleteproduct/${id}`, { id });
     try {
       alert("ok");
       return getuserDetails();

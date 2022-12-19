@@ -45,7 +45,7 @@ const Productdetails = () => {
       qty : 1
     }
     console.log(body)
-    axios.post((url+"/cart"),body,{
+    axios.post(("https://skin-care-hub.onrender.com"+"/cart"),body,{
       headers :{
         token : user
       }
@@ -74,7 +74,7 @@ const Productdetails = () => {
   const x5 = useColorModeValue("gray.900", "gray.50");
   const x6 = useColorModeValue("white", "gray.900");
   const fetchData = () => {
-    axios.get(`${url}/product/${params.id}`).then((res) => {
+    axios.get(`https://skin-care-hub.onrender.com/product/${params.id}`).then((res) => {
       console.log(res);
       setItem(res.data);
     });
