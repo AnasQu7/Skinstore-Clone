@@ -81,7 +81,7 @@ Images and all necessary information required or user intrested to look at.
  ### Product Detail Page
  This the Product detail page where user can checkout and confirm the order.
  
-![App Screenshot](https://i.postimg.cc/tCrK9Y6C/Web-capture-19-12-2022-174240-timely-cucurucho-1b7757-netlify-app.jpg)
+![App Screenshot](https://i.postimg.cc/sx9CymrM/Web-capture-19-12-2022-17454-timely-cucurucho-1b7757-netlify-app.jpg)
 
  ### Product Detail Page
  This the Product detail page where user can checkout and confirm the order.
